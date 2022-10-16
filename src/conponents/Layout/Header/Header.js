@@ -10,9 +10,9 @@ export default function Header() {
       <div className="row">
         <div className="col">
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
-            <a className="navbar-brand" href="/">
+            <NavLink to="/">
               <img src={headerLogo} alt="Bosa Noga" />
-            </a>
+            </NavLink>
             <div className="collapse navbar-collapse" id="navbarMain">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
