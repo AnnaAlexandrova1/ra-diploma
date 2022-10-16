@@ -3,11 +3,12 @@
   justify-content: space-between;
   max-width: 280px;
   margin-left: auto;
+  height: 100%;
 }
 .header-controls-pic {
   height: 32px;
   width: 32px;
-  margin: 0 10px;
+  margin: auto 10px;
   background-image: url(../../assets/img/header-controls-sprite.png);
   background-repeat: no-repeat;
   cursor: pointer;
@@ -28,7 +29,6 @@
 .header-controls-cart-full {
   position: absolute;
   right: -10px;
-  top: -5px;
   display: block;
   height: 21px;
   width: 21px;
@@ -52,6 +52,7 @@
   box-shadow: 0px 0px 10px #D4E4E6;
   border-radius: 50px;
   text-align: right;
+  border: 2px solid red;
 }
 .header-controls-search-form .form-control {
   width: 100%;
@@ -80,26 +81,34 @@
   color: #FFFFFF;
   background: linear-gradient(270deg, rgba(161, 179, 191, 0.8) 72.59%, rgba(161, 179, 191, 0) 98.05%);
 }
+.col{
+  width: 100%;
+  box-sizing: border-box;
+}
 .navbar {
     position: relative;
     display: flex;
+    box-sizing: border-box;
     flex-direction: row;
-    width: 80%;
     margin: 0 auto;
     padding: 10px;
-    justify-content: space-between;
+    width: 100%;
 }
+
 .collapse {
     display: flex;
     flex-direction: row;
-    width: 80%;
     justify-content: space-between;
+    width: 100%;
 }
 .navbar-nav {
     list-style: none;
     display: flex;
     flex-direction: row;
-    margin-left: 10px;
+}
+
+.nav-item{
+     margin: auto;
 }
 
 .nav-item:not(:first-child) {

@@ -1,4 +1,4 @@
-import HeaderControls from './HeaderControls/SearchBlock'
+import HeaderControls from './HeaderControls/HeaderControls'
 import './header.css'
 import headerLogo from '../../assets/img/header-logo.png'
 
