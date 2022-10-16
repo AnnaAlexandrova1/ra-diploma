@@ -30,7 +30,7 @@ section {
   margin: 0 auto;
   box-sizing: border-box;
   border: 2px solid green;
-
+  background-color: #e7ebed;
 }
 
 .row {

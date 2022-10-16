@@ -3,6 +3,14 @@
   padding: 0 25px;
 }
 
+.nav.flex-column{
+    list-style: none;
+}
+
+.nav.flex-column .nav-item{
+    margin-top: 10px;
+}
+
 .footer-pay {
   display: flex;
   justify-content: space-between;
@@ -63,6 +71,9 @@
 
 .footer-copyright {
   font-size: 0.8em;
+}
+.footer-contacts{
+   text-align: end;
 }
 
 .footer-contacts-phone {
