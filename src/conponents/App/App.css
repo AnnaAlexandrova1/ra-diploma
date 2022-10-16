@@ -30,7 +30,11 @@ section {
   margin: 0 auto;
   box-sizing: border-box;
   border: 2px solid green;
-  background-color: #e7ebed;
+}
+
+header.container,
+footer.container {
+ background-color: #e7ebed;
 }
 
 .row {
@@ -45,24 +49,6 @@ section {
 }
 
 /* Banner */
-.banner {
-  position: relative;
-}
-
-.banner-header {
-  position: absolute;
-  z-index: 5;
-  right: 0;
-  top: 42px;
-  height: 98px;
-  width: 487px;
-  font-weight: bold;
-  font-size: 48px;
-  line-height: 98px;
-  text-align: center;
-  color: #FFFFFF;
-  background: linear-gradient(270deg, rgba(161, 179, 191, 0.8) 72.59%, rgba(161, 179, 191, 0) 98.05%);
-}
 
 /* Preloader */
 .preloader {

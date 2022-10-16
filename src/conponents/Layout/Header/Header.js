@@ -1,10 +1,12 @@
-import HeaderControls from './HeaderControls/HeaderControls'
-import './header.css'
-import headerLogo from '../../assets/img/header-logo.png'
+import React from "react";
+import { NavLink } from 'react-router-dom';
+import HeaderControls from "./HeaderControls/HeaderControls";
+import "./header.css";
+import headerLogo from "../../../assets/img/header-logo.png";
 
 export default function Header() {
-    return (
-        <header className="container">
+  return (
+    <header className="container">
       <div className="row">
         <div className="col">
           <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -14,25 +16,29 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="navbarMain">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
-                  <a className="nav-link" href="/">Главная</a>
+                  <NavLink to="/">Главная</NavLink>
                 </li>
+
                 <li className="nav-item">
-                  <a className="nav-link" href="/catalog.html">Каталог</a>
+                  <NavLink to="/catalog">Каталог</NavLink>
                 </li>
+
                 <li className="nav-item">
-                  <a className="nav-link" href="/about.html">О магазине</a>
+                  <NavLink to="/about">О магазине</NavLink>
                 </li>
+
                 <li className="nav-item">
-                  <a className="nav-link" href="/contacts.html">Контакты</a>
+                  <NavLink to="/contacts">Контакты</NavLink>
                 </li>
               </ul>
-                <div>
-                     <HeaderControls />           
-                </div>
+
+              <div>
+                <HeaderControls />
+              </div>
             </div>
           </nav>
         </div>
       </div>
     </header>
-    )
+  );
 }

@@ -9,7 +9,7 @@
   height: 32px;
   width: 32px;
   margin: auto 10px;
-  background-image: url(../../assets/img/header-controls-sprite.png);
+  background-image: url(../../../assets/img/header-controls-sprite.png);
   background-repeat: no-repeat;
   cursor: pointer;
 }
