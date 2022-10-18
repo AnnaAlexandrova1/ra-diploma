@@ -1,0 +1,41 @@
+.col-4 {
+    border: 1px solid gray;
+    width: 31%;
+}
+.card-img-top{
+    width: 100%;
+    min-height: 15em;
+}
+
+.card-text{
+    margin-left: 1.5em;
+}
+
+.btn.btn-outline-primary{
+    margin-left: 1.5em;
+    margin-bottom:  1.5em;
+}
+
+.btn-outline-primary {
+  color: #727e86;
+  border-color: #727e86;
+  background-color: white;
+}
+
+.btn-outline-primary:hover {
+  background-color: #727e86;
+  border-color: #727e86;
+}
+
+
+
+.catalog-item-size {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.catalog-item-size.selected {
+  background: #727e86;
+  border-radius: 15px;
+  color: #fff;
+}

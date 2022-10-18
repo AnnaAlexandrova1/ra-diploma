@@ -13,7 +13,6 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
-          {/* <Route index element={<IndexPage />} /> */}
           <Route index element={<MainPage />} />
           <Route path="catalog" element={<Catalog />} />
           <Route path="about" element={<About />} />

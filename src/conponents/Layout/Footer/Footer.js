@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import Contacts from "./Contacts/Contacts";
 import PaymentWayInfo from "./PaymentWayInfo/PaymentWayInfo";
 import "./footer.css";
@@ -11,19 +12,19 @@ export default function Footer() {
             <h5>Информация</h5>
             <ul className="nav flex-column">
               <li className="nav-item">
-                <a href="/about.html" className="nav-link">
+                <NavLink to="/about">
                   О магазине
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a href="/catalog.html" className="nav-link">
+                <NavLink to="/catalog">
                   Каталог
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a href="/contacts.html" className="nav-link">
+                <NavLink to="/contacts">
                   Контакты
-                </a>
+                </NavLink>
               </li>
             </ul>
           </section>
