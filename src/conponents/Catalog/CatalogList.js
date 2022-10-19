@@ -7,21 +7,35 @@ export default function CatalogList() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [newItemLoading, setNewItemLoading] = useState(false);
+  const [offSet, setOffset] = useState(6);
+  const [itemsEnded, setItemsEnded] = useState(false)
 
   const fetchAPI = new fetchApi();
 
   useEffect(() => {
     updateCatalog();
-  });
+  }, []);
+
+  const onItemsListLoading = () => {
+     setNewItemLoading(true)
+  }
 
   const updateCatalog = () => {
     fetchAPI.getCatalog().then(onCatalogLoaded).catch(onError);
   };
 
   const onCatalogLoaded = (charlist) => {
-    //console.log(charlist);
+    let ended = false; //если длина пришедшего массива будет меньше 6, то можно заблокировать кнопку загрузить еще
+
+    if (charlist.length < 6) {
+      ended = true;
+    }
+    setItems(items => [...items, ...charlist]);
     setLoading(false);
-    setItems(charlist);
+    setNewItemLoading(newItemLoading => false);
+    setOffset(offSet => offSet + 6)
+    setItemsEnded(itemsEnded => ended)
   };
 
   const onError = () => {
@@ -51,7 +65,9 @@ export default function CatalogList() {
       {preloader}
       <div className="row">{catalogList}</div>
       <div className="text-center">
-        <button className="btn btn-outline-primary">Загрузить ещё</button>
+        <button className="btn btn-outline-primary"
+        disabled = {newItemsListLoading}
+        >Загрузить ещё</button>
       </div>
     </>
   );
