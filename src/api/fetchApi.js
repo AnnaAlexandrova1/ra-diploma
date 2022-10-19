@@ -12,11 +12,21 @@ export default class fetchApi{
         return await res.json()
     }
 
+    getCategories = async () => {
+        let res = await fetch(`${link}api/categories`)
+
+        if (!res.ok) {
+            throw new Error ((`Could not fetch ${link}api/categories, status: ${res.status}`))
+        }
+
+        return await res.json()
+    }
+
     getCatalog = async () => {
         let res = await fetch(`${link}api/items`)
 
         if (!res.ok) {
-            throw new Error (`Could not fetch ${link}api/categories, status: ${res.status}`)
+            throw new Error (`Could not fetch ${link}api/items, status: ${res.status}`)
         }
 
         return await res.json()

@@ -3,6 +3,10 @@
   padding: 0 25px;
 }
 
+.footer .row {
+   flex-wrap: nowrap;
+}
+
 .nav.flex-column{
     list-style: none;
 }

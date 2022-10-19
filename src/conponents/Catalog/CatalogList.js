@@ -19,7 +19,7 @@ export default function CatalogList() {
   };
 
   const onCatalogLoaded = (charlist) => {
-    console.log(charlist);
+    //console.log(charlist);
     setLoading(false);
     setItems(charlist);
   };
