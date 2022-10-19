@@ -22,11 +22,11 @@ export default class fetchApi{
         return await res.json()
     }
 
-    getCatalog = async () => {
-        let res = await fetch(`${link}api/items`)
+    getCatalog = async (set) => {
+        let res = await fetch(`${link}api/items?offset=${set}`)
 
         if (!res.ok) {
-            throw new Error (`Could not fetch ${link}api/items, status: ${res.status}`)
+            throw new Error (`Could not fetch ${link}api/items?offset=${set}, status: ${res.status}`)
         }
 
         return await res.json()
