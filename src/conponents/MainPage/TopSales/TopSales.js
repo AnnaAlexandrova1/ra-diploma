@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import fetchApi from "../../../api/fetchApi";
 import Card from "../../Catalog/Card/Card"
+import Preloader from "../../Preloader/Preloader";
 
 import './topSales.css'
 
@@ -46,23 +47,13 @@ export default function TopSales() {
   const preloader = loading ? <Preloader /> : null;
 
 
-  console.log(topList);
+  //console.log(topList);
   return (
-    <section class="top-sales">
-      <h2 class="text-center">Хиты продаж!</h2>
+    <section className="top-sales">
+      <h2 className="text-center">Хиты продаж!</h2>
       {preloader}
-      <div class="row">{topList}</div>
+      <div className="row">{topList}</div>
     </section>
   );
 }
 
-const Preloader = () => {
-  return (
-    <div class="preloader">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  );
-};

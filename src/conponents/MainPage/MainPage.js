@@ -1,5 +1,5 @@
 import TopSales from "./TopSales/TopSales";
-import CatalogList from "./CatalogList";
+import CatalogList from '../Catalog/CatalogList'
 
 export default function MainPage() {
   return (

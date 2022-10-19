@@ -1,10 +1,21 @@
 .col-4 {
     border: 1px solid gray;
     width: 31%;
+    margin-bottom: 2em;
 }
+.card.catalog-item-card {
+    min-height: 580px;
+    position:relative;
+}
+ 
 .card-img-top{
     width: 100%;
     min-height: 15em;
+}
+
+.card-body {
+  position: absolute;
+  bottom: 0;
 }
 
 .card-text{
