@@ -11,7 +11,7 @@ export default function CatalogCategories() {
 
   useEffect(() => {
     updateCategories();
-  });
+  }, []);
 
   const updateCategories = () => {
     fetchAPI.getCategories().then(onCategoriesLoaded).catch(onError);
