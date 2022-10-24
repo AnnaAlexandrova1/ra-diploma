@@ -42,4 +42,14 @@ export default class fetchApi{
         return await res.json()
     }
 
+    search = async (text) => {
+        let res = await fetch(`${link}api/items?q=<${text}>`)
+
+        if (!res.ok) {
+            throw new Error (`Could not fetch ${link}api/items?q=<${text}>, status: ${res.status}`)
+        }
+
+        return await res.json()
+    }
+
 }
