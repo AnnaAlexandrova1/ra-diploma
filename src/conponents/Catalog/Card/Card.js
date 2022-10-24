@@ -1,4 +1,6 @@
-import './card.css'
+import "./card.css";
+import { Link } from "react-router-dom";
+import ItemPage from "../../ItemPage/ItemPage";
 
 export default function Card(props) {
   const { id, category, title, images, price } = props;
@@ -9,10 +11,9 @@ export default function Card(props) {
         <div className="card-body">
           <p className="card-text">{title}</p>
           <p className="card-text">{price} руб.</p>
-          <button className="btn btn-outline-primary">
-          {/* <button href="/products/1.html" className="btn btn-outline-primary"> */}
-            Заказать
-          </button>
+          <Link to={`/catalog/${id}`}>
+            <button className="btn btn-outline-primary">Заказать</button>
+          </Link>
         </div>
       </div>
     </div>
