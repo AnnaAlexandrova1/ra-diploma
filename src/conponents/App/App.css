@@ -94,6 +94,35 @@ section {
   outline: none;
   box-shadow: none;
 }
+.navbar {
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    margin: 0 auto;
+    padding: 10px;
+    width: 100%;
+}
+
+.collapse {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.navbar-nav {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-item{
+     margin: auto;
+}
+
+.navbar-nav .nav-item {
+   margin-left: 10px;
+} 
 
 /* Banner */
 .banner {
@@ -211,6 +240,33 @@ section {
   box-shadow: none;
 }
 
+.col-4 {
+    width: 31%;
+    margin-bottom: 2em;
+}
+.card.catalog-item-card {
+    min-height: 620px;
+    position:relative;
+}
+
+.main-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card-body {
+  position: absolute;
+  bottom: 0;
+}
+
+.card-img-top{
+    width: 100%;
+    min-height: 300px;
+    max-height: 550px;
+}
+
+
 /* Footer */
 .footer {
   padding: 0 25px;
@@ -284,6 +340,13 @@ section {
 
 .footer-contacts-email {
   display: block;
+}
+
+.footer-contacts{
+   text-align: end;
+}
+.flex-column .nav-item {
+  margin-left: 0;
 }
 
 /* Bootstrap */

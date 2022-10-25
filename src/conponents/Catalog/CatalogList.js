@@ -79,7 +79,7 @@ export default function CatalogList() {
   return (
     <>
       {preloader}
-      <div className="row">{catalogList}</div>
+      <div className="row main-row">{catalogList}</div>
       <div className="text-center">
         <button className="btn btn-outline-primary"
           disabled = {newItemLoading}
