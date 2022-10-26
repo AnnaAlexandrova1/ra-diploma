@@ -1,9 +1,11 @@
 import ReactDOM from 'react-dom';
-import { createStore } from "redux";
-import clickOrder from '../reducers/clickOrder';
+// import { configureStore } from '@reduxjs/toolkit';
+// import  { Reducer } from '@reduxjs/toolkit'
+import { createStore } from 'redux'
+import reducer from '../reducers/reducer';
 import * as actions from '../actions/actions'
 
-const store = createStore(clickOrder);
+const store = createStore(reducer);
  
 //const {dispatch, subscribe, getState} = store;
 

@@ -9,15 +9,24 @@ import ItemPage from "../ItemPage/ItemPage";
 import Shoppingbag from "../Shoppingbag/Shoppingbag";
 import Error from "../Error/Error"
 
+import { useDispatch, useSelector } from "react-redux";
+import { Provider } from "react-redux";
+import store from "../../store/index";
+
 import "./App.css";
 
 function App() {
+  // const dispatch = useDispatch()
+  // const id = useSelector(state => state.itemId)
+  // console.log(id)
+  
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route path="catalog" element={<Catalog />} />
+          <Route path="catalog" element={
+            <Catalog />}/>
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path='catalog/:id' element={<ItemPage />} />

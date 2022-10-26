@@ -3,9 +3,11 @@ import fetchApi from "../../api/fetchApi";
 import ItemInfo from "./ItemInfo";
 import Preloader from "../Preloader/Preloader";
 import './itemPage.css'
+import { useDispatch, useSelector } from "react-redux";
 
 
 export default function ItemPage(props) {
+
   const [item, setItem] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -18,8 +20,9 @@ export default function ItemPage(props) {
 
   //поменяй тут переменную после отрисовки
   const getItemInfo = () => {
-    fetchAPI.getItemInfo(20).then(renderItemInfo).catch(onError);
+    fetchAPI.getItemInfo(22).then(renderItemInfo).catch(onError);
   };
+
 
   const renderItemInfo = (char) => {
     setItem(char);
@@ -35,7 +38,7 @@ export default function ItemPage(props) {
     <ItemInfo productInfo={item} />
   ) : null;
   const preloader = loading ? <Preloader /> : null;
-    console.log(item)
+    //console.log(item)
   return (
     <section className="catalog-item">
       {itemPage}

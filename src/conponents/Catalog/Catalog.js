@@ -7,6 +7,8 @@ import CatalogList from "./CatalogList";
 
 import "./catalog.css";
 
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function Catalog() {
   const [searchValue, setSearchValue] = useState('')

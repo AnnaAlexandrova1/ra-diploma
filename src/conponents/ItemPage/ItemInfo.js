@@ -1,4 +1,7 @@
-import PropTypes from "prop-types";
+import PropTypes, { func } from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 export default function ItemInfo(props) {
   const {
@@ -17,6 +20,14 @@ export default function ItemInfo(props) {
     sku,
     title,
   } = props.productInfo;
+
+  const dispatch = useDispatch()
+  const itemId = useSelector(state => state.id)
+
+  const addItem = (itemId) => {
+    console.log(itemId)
+    dispatch({type: 'ADD_ITEM', payload: itemId})
+}
 
   return (
     <>
@@ -69,7 +80,7 @@ export default function ItemInfo(props) {
               </span>
             </p>
           </div>
-          <button className="btn btn-danger btn-block btn-lg">В корзину</button>
+          <button className="btn btn-danger btn-block btn-lg" onClick={() => addItem(id)}>В корзину</button>
         </div>
       </div>
     </>
