@@ -1,4 +1,4 @@
-const initialState = { itemId: 0 }
+const initialState = { itemId: null }
 
 const reducer = (state = initialState, action) => {
     

@@ -6,7 +6,7 @@ import './itemPage.css'
 import { useDispatch, useSelector } from "react-redux";
 
 
-export default function ItemPage(props) {
+export default function ItemPage() {
 
   const [item, setItem] = useState(null);
   const [error, setError] = useState(false);
@@ -18,9 +18,11 @@ export default function ItemPage(props) {
     getItemInfo();
   }, []);
 
-  //поменяй тут переменную после отрисовки
+  const itemId = useSelector(state => state.itemId)
+  //console.log(itemId)
+
   const getItemInfo = () => {
-    fetchAPI.getItemInfo(22).then(renderItemInfo).catch(onError);
+    fetchAPI.getItemInfo(itemId).then(renderItemInfo).catch(onError);
   };
 
 
