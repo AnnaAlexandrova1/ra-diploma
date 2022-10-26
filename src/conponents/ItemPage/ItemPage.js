@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import fetchApi from "../../api/fetchApi";
 import ItemInfo from "./ItemInfo";
 import Preloader from "../Preloader/Preloader";
-import './itemPage.css'
+import "./itemPage.css";
 import { useDispatch, useSelector } from "react-redux";
 
-
 export default function ItemPage() {
-
   const [item, setItem] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -18,13 +16,13 @@ export default function ItemPage() {
     getItemInfo();
   }, []);
 
-  const itemId = useSelector(state => state.itemId)
-  //console.log(itemId)
+  const itemId = useSelector((state) => state.itemId);
+  const bag = useSelector((state) => state.shoppingBag);
+  console.log(bag)
 
   const getItemInfo = () => {
     fetchAPI.getItemInfo(itemId).then(renderItemInfo).catch(onError);
   };
-
 
   const renderItemInfo = (char) => {
     setItem(char);
@@ -40,7 +38,7 @@ export default function ItemPage() {
     <ItemInfo productInfo={item} />
   ) : null;
   const preloader = loading ? <Preloader /> : null;
-    //console.log(item)
+  //console.log(item)
   return (
     <section className="catalog-item">
       {itemPage}

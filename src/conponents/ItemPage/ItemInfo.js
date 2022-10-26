@@ -1,7 +1,5 @@
 import PropTypes, { func } from "prop-types";
-
-
-
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ItemInfo(props) {
   const {
@@ -21,7 +19,12 @@ export default function ItemInfo(props) {
     title,
   } = props.productInfo;
 
-   
+  const dispatch = useDispatch()
+  //const itemId = useSelector(state => state.itemId)
+
+   const addToShoppingBag = (itemId) => {
+   dispatch({type: 'ADD_TO_SHOPPINGBAG', payload: itemId})
+}
 
   return (
     <>
@@ -74,7 +77,7 @@ export default function ItemInfo(props) {
               </span>
             </p>
           </div>
-          <button className="btn btn-danger btn-block btn-lg">В корзину</button>
+          <button className="btn btn-danger btn-block btn-lg" onClick={() => addToShoppingBag(id)}>В корзину</button>
         </div>
       </div>
     </>

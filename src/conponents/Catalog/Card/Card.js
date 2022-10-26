@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 export default function Card(props) {
   const { id, category, title, images, price } = props;
 
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const itemId = useSelector(state => state.itemId)
 
    const addItem = (itemId) => {
     dispatch({type: 'ADD_ITEM', payload: itemId})
-}
+  }
+  
   return (
     <div className="col-4">
       <div className="card catalog-item-card">
