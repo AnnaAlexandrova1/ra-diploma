@@ -206,6 +206,11 @@ section {
   margin-bottom: 2em;
 }
 
+.add-width {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .catalog-item-card {
   margin-bottom: 1em;
 }
@@ -249,7 +254,7 @@ section {
     position:relative;
 }
 
-.main-row{
+.align-space-between{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;

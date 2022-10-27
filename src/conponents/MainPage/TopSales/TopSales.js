@@ -3,7 +3,6 @@ import fetchApi from "../../../api/fetchApi";
 import Card from "../../Catalog/Card/Card"
 import Preloader from "../../Preloader/Preloader";
 
-import './topSales.css'
 
 export default function TopSales() {
   const [items, setItems] = useState([]);
@@ -52,7 +51,7 @@ export default function TopSales() {
     <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
       {preloader}
-      <div className="row">{topList}</div>
+      <div className="row align-space-between">{topList}</div>
     </section>
   );
 }

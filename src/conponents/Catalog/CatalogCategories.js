@@ -39,7 +39,7 @@ export default function CatalogCategories() {
   const categoriesList = !(loading || error || !list) ? catList : null;
 
   return (
-    <ul className="catalog-categories nav justify-content-center">
+    <ul className="catalog-categories nav justify-content-center add-width">
       <li className="nav-item">
         <a className="nav-link active" href="#">
           Все
