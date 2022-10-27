@@ -1,5 +1,6 @@
 import PropTypes, { func } from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom"
 
 export default function ItemInfo(props) {
   const {
@@ -19,12 +20,12 @@ export default function ItemInfo(props) {
     title,
   } = props.productInfo;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   //const itemId = useSelector(state => state.itemId)
 
-   const addToShoppingBag = (itemId) => {
-   dispatch({type: 'ADD_TO_SHOPPINGBAG', payload: itemId})
-}
+  const addToShoppingBag = (productInfo) => {
+    dispatch({ type: "ADD_TO_SHOPPINGBAG", payload: productInfo });
+  };
 
   return (
     <>
@@ -64,10 +65,9 @@ export default function ItemInfo(props) {
           </table>
           <div className="text-center">
             <p>
-              Размеры в наличии:{" "}
-              <span className="catalog-item-size selected">18 US</span>{" "}
-              <span className="catalog-item-size">20 US</span>
-            </p>
+              Размеры в наличии:{" "}</p>
+              <Sizes list={sizes}/>
+            
             <p>
               Количество:{" "}
               <span className="btn-group btn-group-sm pl-2">
@@ -77,11 +77,30 @@ export default function ItemInfo(props) {
               </span>
             </p>
           </div>
-          <button className="btn btn-danger btn-block btn-lg" onClick={() => addToShoppingBag(id)}>В корзину</button>
+          <Link to={"/cart"}>
+            <button
+              className="btn btn-danger btn-block btn-lg"
+              onClick={() => addToShoppingBag(props.productInfo)}
+            >
+              В корзину
+            </button>
+          </Link>
         </div>
       </div>
     </>
   );
+}
+
+const Sizes = (props) => {
+  return props.list.map((item, i) => {
+    if (item.size) {
+      return (
+        <span className="catalog-item-size"
+          //onClick={() =>  }
+          key={i}>{item.size}</span>
+    )
+    }
+  })
 }
 
 ItemInfo.propTypes = {

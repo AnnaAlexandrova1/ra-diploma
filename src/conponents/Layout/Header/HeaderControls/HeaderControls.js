@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function HeaderControls() {
   const [searchFocus, setSearchFocus] = useState(false);
@@ -23,13 +24,12 @@ export default function HeaderControls() {
           className="header-controls-pic header-controls-search"
           onClick={onSearchFocus}
         ></div>
-        {/*
-                  <!-- Do programmatic navigation on click to /cart.html -->
-                  */}
-        <div className="header-controls-pic header-controls-cart">
-          <div className="header-controls-cart-full">1</div>
-          <div className="header-controls-cart-menu"></div>
-        </div>
+        <Link to={'cart'}>
+          <div className="header-controls-pic header-controls-cart">
+            <div className="header-controls-cart-full">1</div>
+            <div className="header-controls-cart-menu"></div>
+          </div>
+        </Link>
       </div>
       <form data-id="search-form" className={drowVisibility}>
         <input className="form-control" placeholder="Поиск" />

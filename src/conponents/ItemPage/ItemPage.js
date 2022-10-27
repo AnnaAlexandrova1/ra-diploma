@@ -17,8 +17,8 @@ export default function ItemPage() {
   }, []);
 
   const itemId = useSelector((state) => state.itemId);
-  const bag = useSelector((state) => state.shoppingBag);
-  console.log(bag)
+  // const bag = useSelector((state) => state.shoppingBag);
+  // console.log(bag)
 
   const getItemInfo = () => {
     fetchAPI.getItemInfo(itemId).then(renderItemInfo).catch(onError);

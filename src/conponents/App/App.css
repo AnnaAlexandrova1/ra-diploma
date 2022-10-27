@@ -265,6 +265,10 @@ section {
   bottom: 0;
 }
 
+.card-body.not-absolute{
+  position: relative;
+}
+
 .card-img-top{
     width: 100%;
     min-height: 300px;
