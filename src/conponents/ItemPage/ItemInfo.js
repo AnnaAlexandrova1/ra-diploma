@@ -80,7 +80,7 @@ export default function ItemInfo(props) {
           <Link to={"/cart"}>
             <button
               className="btn btn-danger btn-block btn-lg"
-              onClick={() => addToShoppingBag(props.productInfo)}
+              onClick={() => addToShoppingBag(id)}
             >
               В корзину
             </button>

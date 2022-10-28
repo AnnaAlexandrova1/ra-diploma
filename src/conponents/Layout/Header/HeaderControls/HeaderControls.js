@@ -1,8 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function HeaderControls() {
   const [searchFocus, setSearchFocus] = useState(false);
+  const [cartQuantaty, setCartQuantaty] = useState(0);
+
+  useEffect(() => {
+    setCartQuantaty(items.length);
+  });
+
+  const showQuantaty = () => {
+    if (!cartQuantaty) {
+      return "header-controls-cart-full invisible";
+    }
+    return "header-controls-cart-full";
+  };
+
+  const items = useSelector((state) => state.shoppingBag);
 
   const onSearchFocus = () => {
     setSearchFocus(!searchFocus);
@@ -24,9 +39,9 @@ export default function HeaderControls() {
           className="header-controls-pic header-controls-search"
           onClick={onSearchFocus}
         ></div>
-        <Link to={'cart'}>
+        <Link to={"cart"}>
           <div className="header-controls-pic header-controls-cart">
-            <div className="header-controls-cart-full">1</div>
+            {<div className={showQuantaty()}>{cartQuantaty}</div>}
             <div className="header-controls-cart-menu"></div>
           </div>
         </Link>
