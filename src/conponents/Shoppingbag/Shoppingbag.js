@@ -31,13 +31,17 @@ export default function Shoppingbag() {
               <th scope="col">Действия</th>
             </tr>
           </thead>
-          {list}
+          <tbody>
+              {list}
+           </tbody>
+          <tfoot>
           <tr>
             <td colSpan="5" className="text-right">
               Общая стоимость
             </td>
             <td>{calcOrder(shoppingBag)} руб.</td>
-          </tr>
+            </tr>
+            </tfoot>
         </table>
       </section>
       <Order />

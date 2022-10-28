@@ -96,7 +96,7 @@ const Sizes = (props) => {
     if (item.size) {
       return (
         <span className="catalog-item-size"
-          //onClick={() =>  }
+          //onClick={() => {}  }
           key={i}>{item.size}</span>
     )
     }
