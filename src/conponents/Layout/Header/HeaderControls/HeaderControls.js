@@ -7,17 +7,17 @@ export default function HeaderControls() {
   const [cartQuantaty, setCartQuantaty] = useState(0);
 
   useEffect(() => {
-    setCartQuantaty(items.length);
+    setCartQuantaty(qty);
   });
 
   const showQuantaty = () => {
-    if (!cartQuantaty) {
+    if (cartQuantaty===0) {
       return "header-controls-cart-full invisible";
     }
     return "header-controls-cart-full";
   };
 
-  const items = useSelector((state) => state.shoppingBag);
+  const qty = useSelector((state) => state.qty);
 
   const onSearchFocus = () => {
     setSearchFocus(!searchFocus);
@@ -41,7 +41,7 @@ export default function HeaderControls() {
         ></div>
         <Link to={"cart"}>
           <div className="header-controls-pic header-controls-cart">
-            {<div className={showQuantaty()}>{cartQuantaty}</div>}
+            <div className={showQuantaty()}>{cartQuantaty}</div>
             <div className="header-controls-cart-menu"></div>
           </div>
         </Link>

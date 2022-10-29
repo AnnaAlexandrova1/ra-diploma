@@ -373,6 +373,10 @@ h2, .h2 {
   border-color: #727e86;
 }
 
+.btn-outline-primary.add-margin-bottom{
+  margin-bottom: 30px;
+}
+
 .btn-outline-primary:hover {
   background-color: #727e86;
   border-color: #727e86;

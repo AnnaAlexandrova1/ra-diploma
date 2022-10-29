@@ -81,7 +81,7 @@ export default function CatalogList() {
       {preloader}
       <div className="row align-space-between">{catalogList}</div>
       <div className="text-center">
-        <button className="btn btn-outline-primary"
+        <button className="btn btn-outline-primary add-margin-bottom"
           disabled = {newItemLoading}
           onClick={() => updateCatalog(offSet)}
         >

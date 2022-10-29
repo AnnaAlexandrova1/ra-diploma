@@ -1,6 +1,5 @@
 import PropTypes, { func } from "prop-types";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToStorage } from "../../localStorage/localStorage";
 
@@ -27,12 +26,6 @@ export default function ItemInfo(props) {
 
   const updateSize = (char) => {
     setSelectSize(char);
-  };
-
-  const dispatch = useDispatch();
-
-  const addToShoppingBag = (id) => {
-    dispatch({ type: "ADD_TO_SHOPPINGBAG", payload: id });
   };
 
   return (
@@ -110,7 +103,6 @@ export default function ItemInfo(props) {
               className="btn btn-danger btn-block btn-lg"
               disabled={!selectSize}
               onClick={() => {
-                addToShoppingBag(id);
                 addToStorage(
                   { id: id, title: title, price: price, sku: sku },
                   qty,

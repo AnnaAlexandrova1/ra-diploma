@@ -1,22 +1,24 @@
 //itemId id артикула который передается на страницу ItemPage при клике на странице каталога или главной на "заказать"
+import * as actions from '../actions/actions'
+
 
 const initialState = {
     itemId: null,
-    shoppingBag: [],
+    qty: 0,
 }
 
 const reducer = (state = initialState, action) => {
     
     switch (action.type) {
-        case "ADD_ITEM":
+        case actions.ADD_ITEM:
             return {
                 ...state,
                 itemId: action.payload
             };
-         case "ADD_TO_SHOPPINGBAG":
+         case actions.QTY_SHOPPINGBAG:
             return {
                 ...state,
-                shoppingBag: [...state.shoppingBag, action.payload] 
+                qty: action.payload
             };
         default:
             return state;
