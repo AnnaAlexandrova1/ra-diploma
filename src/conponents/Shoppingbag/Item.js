@@ -1,9 +1,11 @@
-const Item = ({ item }) => {
+import { deleteFromShoppinBag } from '../../localStorage/localStorage'
+
+const Item = ({ item, updateShoppingBag, i }) => {
   const sum = +item.item.price * + item.qty
 
   return (
     <tr key={item.item.id}>
-      <td scope="row">1</td>
+      <td scope="row">{i+1}</td>
       <td>
         <a href="/products/1.html">{item.item.title}</a>
       </td>
@@ -12,7 +14,11 @@ const Item = ({ item }) => {
       <td>{item.item.price} руб.</td>
       <td>{sum} руб.</td>
       <td>
-        <button className="btn btn-outline-danger btn-sm">Удалить</button>
+        <button className="btn btn-outline-danger btn-sm"
+          onClick={() => {
+            deleteFromShoppinBag(item.item.sku, item.size);
+            updateShoppingBag()
+          }}>Удалить</button>
       </td>
     </tr>
   );

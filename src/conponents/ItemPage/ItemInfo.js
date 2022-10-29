@@ -105,9 +105,10 @@ export default function ItemInfo(props) {
               </span>
             </p>
           </div>
-          <Link to={"/cart"}>
+          <Link to={selectSize ? "/cart" : "#"}>
             <button
               className="btn btn-danger btn-block btn-lg"
+              disabled={!selectSize}
               onClick={() => {
                 addToShoppingBag(id);
                 addToStorage(
@@ -115,8 +116,7 @@ export default function ItemInfo(props) {
                   qty,
                   selectSize
                 );
-              }}
-              disabled={!selectSize}>
+              }}>
               В корзину
             </button>
           </Link>

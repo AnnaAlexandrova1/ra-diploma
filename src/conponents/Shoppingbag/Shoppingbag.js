@@ -6,12 +6,19 @@ import Item from "./Item";
 
 export default function Shoppingbag() {
   const [error, setError] = useState(false);
+  const [ItemsList, setItemsList] = useState([])
+  //const shoppingBag = getShoppingBag()
 
-  const shoppingBag = getShoppingBag();
+  useEffect(() => setItemsList(getShoppingBag()), [])
 
-  const list = shoppingBag.map((item) => {
-    return <Item item={item} key={item.item.id} />;
-  });
+  const updateShoppingBag = () => {
+      setItemsList(getShoppingBag())
+  }
+
+  const list = ItemsList.map((item, i) => {
+    return <Item item={item}  updateShoppingBag={updateShoppingBag} i={i} key={item.item.id} />;
+    })
+  
 
   return (
     <>
@@ -35,7 +42,7 @@ export default function Shoppingbag() {
               <td colSpan="5" className="text-right">
                 Общая стоимость
               </td>
-              <td>{calcOrder(shoppingBag)} руб.</td>
+              <td>{calcOrder(ItemsList)} руб.</td>
             </tr>
           </tfoot>
         </table>
