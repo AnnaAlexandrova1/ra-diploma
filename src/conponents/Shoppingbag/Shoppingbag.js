@@ -1,41 +1,53 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { getShoppingBag } from "../../localStorage/localStorage";
-import { QTY_SHOPPINGBAG } from '../../actions/actions'
+import { QTY_SHOPPINGBAG } from "../../actions/actions";
 import Order from "./Order";
 import Item from "./Item";
 
 export default function Shoppingbag() {
   const [error, setError] = useState(false);
-  const [ItemsList, setItemsList] = useState([])
-  const [totalQty, setTotalQty] = useState(0)
+  const [ItemsList, setItemsList] = useState([]);
+  const [totalQty, setTotalQty] = useState(0);
   //const shoppingBag = getShoppingBag()
 
-  useEffect(() => setItemsList(getShoppingBag()), [])
-  useEffect(() => setTotalQty(calcTotalQty(ItemsList)), [ItemsList])
-  useEffect(() => qtyShoppingBag(totalQty), [totalQty])
+  useEffect(() => setItemsList(getShoppingBag()), []);
+  useEffect(() => setTotalQty(calcTotalQty(ItemsList)), [ItemsList]);
+  useEffect(() => qtyShoppingBag(totalQty), [totalQty]);
 
   const updateShoppingBag = () => {
-      setItemsList(getShoppingBag())
-  }
+    setItemsList(getShoppingBag());
+  };
 
   const calcTotalQty = (ItemsList) => {
     if (ItemsList.length < 1) {
-    return 0 ;
+      return 0;
     }
-   return ItemsList.reduce((sum, item) => sum + item.qty, 0);
-  }
+    return ItemsList.reduce((sum, item) => sum + item.qty, 0);
+  };
 
   const dispatch = useDispatch();
   const qtyShoppingBag = (totalQty) => {
-   dispatch({type: QTY_SHOPPINGBAG, payload: totalQty})  
+    dispatch({ type: QTY_SHOPPINGBAG, payload: totalQty });
   };
 
+  const orderPosted = (succes) => {
+    if (succes) {
+      setItemsList([]);
+    }
+  };
 
   const list = ItemsList.map((item, i) => {
-    return <Item item={item}  updateShoppingBag={updateShoppingBag} i={i} key={item.item.id} />;
-    })
-  
+    return (
+      <Item
+        item={item}
+        updateShoppingBag={updateShoppingBag}
+        i={i}
+        key={item.item.id}
+      />
+    );
+  });
+
   //console.log(totalQty)
   return (
     <>
@@ -64,7 +76,7 @@ export default function Shoppingbag() {
           </tfoot>
         </table>
       </section>
-      <Order />
+      <Order orderPosted={orderPosted} />
     </>
   );
 }
