@@ -1,18 +1,16 @@
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import ShoppingList from "./ShoppingList";
+import { getShoppingBag } from "../../localStorage/localStorage";
 import Order from "./Order";
-import Item from "./ShoppingList";
-import { current } from "@reduxjs/toolkit";
+import Item from "./Item";
 
 export default function Shoppingbag() {
   const [error, setError] = useState(false);
 
-  const shoppingBag = useSelector((state) => state.shoppingBag);
-  //console.log(shoppingbag);
+  const shoppingBag = getShoppingBag();
 
-  const list = shoppingBag.map((i) => {
-      return <Item i={i} key={ i.id} />;
+  const list = shoppingBag.map((item) => {
+    return <Item item={item} key={item.item.id} />;
   });
 
   return (
@@ -31,17 +29,15 @@ export default function Shoppingbag() {
               <th scope="col">Действия</th>
             </tr>
           </thead>
-          <tbody>
-              {list}
-           </tbody>
+          <tbody>{list}</tbody>
           <tfoot>
-          <tr>
-            <td colSpan="5" className="text-right">
-              Общая стоимость
-            </td>
-            <td>{calcOrder(shoppingBag)} руб.</td>
+            <tr>
+              <td colSpan="5" className="text-right">
+                Общая стоимость
+              </td>
+              <td>{calcOrder(shoppingBag)} руб.</td>
             </tr>
-            </tfoot>
+          </tfoot>
         </table>
       </section>
       <Order />
@@ -49,12 +45,10 @@ export default function Shoppingbag() {
   );
 }
 
-
-function calcOrder (i) {
-    if(i.length < 1) {
-        return 0
-    }
-
-    let res =  i.reduce((sum, item) => sum + item.price, 0)
-    return res
+function calcOrder(i) {
+  if (i.length < 1) {
+    return 0;
+  }
+  let res = i.reduce((sum, item) => sum + item.item.price * item.qty, 0);
+  return res;
 }

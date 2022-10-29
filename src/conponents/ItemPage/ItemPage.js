@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import fetchApi from "../../api/fetchApi";
 import ItemInfo from "./ItemInfo";
 import Preloader from "../Preloader/Preloader";
-import "./itemPage.css";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ItemPage() {

@@ -1,6 +1,8 @@
 import PropTypes, { func } from "prop-types";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { addToStorage } from "../../localStorage/localStorage";
 
 export default function ItemInfo(props) {
   const {
@@ -20,11 +22,17 @@ export default function ItemInfo(props) {
     title,
   } = props.productInfo;
 
-  const dispatch = useDispatch();
-  //const itemId = useSelector(state => state.itemId)
+  const [selectSize, setSelectSize] = useState(null);
+  const [qty, setQty] = useState(1);
 
-  const addToShoppingBag = (productInfo) => {
-    dispatch({ type: "ADD_TO_SHOPPINGBAG", payload: productInfo });
+  const updateSize = (char) => {
+    setSelectSize(char);
+  };
+
+  const dispatch = useDispatch();
+
+  const addToShoppingBag = (id) => {
+    dispatch({ type: "ADD_TO_SHOPPINGBAG", payload: id });
   };
 
   return (
@@ -64,24 +72,51 @@ export default function ItemInfo(props) {
             </tbody>
           </table>
           <div className="text-center">
+            <p>Размеры в наличии: </p>
+            <Sizes list={sizes} updateSize={updateSize} />
             <p>
-              Размеры в наличии:{" "}</p>
-              <Sizes list={sizes}/>
-            
-            <p>
-              Количество:{" "}
+              Количество:
               <span className="btn-group btn-group-sm pl-2">
-                <button className="btn btn-secondary">-</button>
-                <span className="btn btn-outline-primary">1</span>
-                <button className="btn btn-secondary">+</button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    if (qty > 1) {
+                      setQty((qty) => qty - 1);
+                    } else {
+                      return;
+                    }
+                  }}
+                >
+                  -
+                </button>
+                <span className="btn btn-outline-primary">{qty}</span>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => {
+                    if (qty < 10) {
+                      setQty((qty) => qty + 1);
+                    } else {
+                      return;
+                    }
+                  }}
+                >
+                  +
+                </button>
               </span>
             </p>
           </div>
           <Link to={"/cart"}>
             <button
               className="btn btn-danger btn-block btn-lg"
-              onClick={() => addToShoppingBag(id)}
-            >
+              onClick={() => {
+                addToShoppingBag(id);
+                addToStorage(
+                  { id: id, title: title, price: price, sku: sku },
+                  qty,
+                  selectSize
+                );
+              }}
+              disabled={!selectSize}>
               В корзину
             </button>
           </Link>
@@ -91,17 +126,38 @@ export default function ItemInfo(props) {
   );
 }
 
+
 const Sizes = (props) => {
+  const list = Array.from(document.querySelectorAll("#sizes"));
+
+  if (list.length > 0) {
+    list.forEach((item) => {
+      item.onclick = () => {
+        list.forEach((elem) => {
+          elem.classList.remove("selected");
+        });
+        item.classList.add("selected");
+        props.updateSize(item.textContent);
+      };
+    });
+  }
+
   return props.list.map((item, i) => {
     if (item.size) {
       return (
-        <span className="catalog-item-size"
+        <span
+          className="catalog-item-size"
+          id="sizes"
+          //onClick={() => {}}
           //onClick={() => {}  }
-          key={i}>{item.size}</span>
-    )
+          key={i}
+        >
+          {item.size}
+        </span>
+      );
     }
-  })
-}
+  });
+};
 
 ItemInfo.propTypes = {
   category: PropTypes.number,
