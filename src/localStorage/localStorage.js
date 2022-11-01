@@ -24,15 +24,15 @@ export function addToStorage(item, qty = 1, size) {
 
   let i;
 
-  console.log("local storage");
-  for (i = 0; i < localStorage.length; i++) {
-    console.log(
-      localStorage.key(i) +
-        "=[" +
-        localStorage.getItem(localStorage.key(i)) +
-        "]"
-    );
-  }
+  // console.log("local storage");
+  // for (i = 0; i < localStorage.length; i++) {
+  //   console.log(
+  //     localStorage.key(i) +
+  //       "=[" +
+  //       localStorage.getItem(localStorage.key(i)) +
+  //       "]"
+  //   );
+  // }
 }
 
 // получаем данные о товарах

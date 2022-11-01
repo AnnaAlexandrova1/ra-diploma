@@ -6,7 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./conponents/App/App";
 import store from "./store";
+import fetchApi from "./api/fetchApi";
 
+const fetchAPI = new fetchApi()
+fetchAPI.getItems(12, 6, 'туфли').then((result) => console.log(result))
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
