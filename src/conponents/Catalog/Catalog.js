@@ -13,8 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export default function Catalog() {
-  
   const [error, setError] = useState(false)
+
   const dispatch = useDispatch()
   const {isSearch, params } = useSelector(state => state.serviceCatalog)
   const fetchAPI = new fetchApi()
@@ -38,7 +38,7 @@ export default function Catalog() {
       <form className="catalog-search-form form-inline"
         >
         <input className="form-control" placeholder="Поиск"
-          onChange={(evt) => {console.log(evt.target.value)
+          onChange={(evt) => {
             dispatch(actionsPayload.inputSearch(evt.target.value))
           }
           }

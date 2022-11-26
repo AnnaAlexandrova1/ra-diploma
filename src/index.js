@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
@@ -9,7 +9,9 @@ import store from "./store";
 import fetchApi from "./api/fetchApi";
 
 const fetchAPI = new fetchApi()
-fetchAPI.getItems({offset:6, search:'туфли' }).then((result) => console.log(result))
+
+fetchAPI.getCatalog({}).then((result) => console.log(result))
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

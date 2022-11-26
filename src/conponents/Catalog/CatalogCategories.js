@@ -33,7 +33,7 @@ export default function CatalogCategories() {
   const catList = list.map((i) => {
     return (
       <li className="nav-item" key={i.id}
-      onClick={()=> dispatch(actionsPayload.changeCategory(i.title))}>
+      onClick={()=> dispatch(actionsPayload.changeCategory(i.id))}>
         <a className="nav-link" href="#">
           {i.title}
         </a>

@@ -3,8 +3,9 @@ import * as actions from "../actions/actions";
 const initialState = {
   isSearch: false,
   params: {
-    category: null,
+    categoryID: null,
     searchText: '',
+    offset: 0,
   },
 };
 
@@ -16,7 +17,7 @@ const serviceCatalogReducer = (state = initialState, action) => {
         isSearch: true,
         params: {
           ...state.params,
-          category: action.payload.category,
+          categoryID: action.payload.categoryID,
         }
       }
       case actions.INPUT_SEARCH:

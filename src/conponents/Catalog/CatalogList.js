@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import fetchApi from "../../api/fetchApi";
 import Card from "./Card/Card";
 import Preloader from "../Preloader/Preloader";
+import { useSelector } from "react-redux";
 
 export default function CatalogList() {
   const [items, setItems] = useState([]);
@@ -12,6 +13,8 @@ export default function CatalogList() {
   const [itemsEnded, setItemsEnded] = useState(false)
 
   const fetchAPI = new fetchApi();
+  const { isSearch, params } = useSelector(state => state.serviceCatalog)
+  fetchAPI.getItems(params).then((result) => console.log(result))
 
   useEffect(() => {
     updateCatalog();

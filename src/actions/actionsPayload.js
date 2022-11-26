@@ -1,8 +1,8 @@
 import * as actions from './actions'
 
-export const changeCategory = (category) => ({
+export const changeCategory = (categoryID) => ({
     type: actions.CHANGE_CATEGORY,
-    payload: {category}
+    payload: {categoryID}
 })
 
 export const inputSearch = (searchText) => ({

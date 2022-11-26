@@ -1,6 +1,8 @@
+import { useSelector } from "react-redux";
 import link from "./link";
 
 export default class fetchApi {
+   // извлечем параметры поиска для запроса из State
   getTopSales = async () => {
     let res = await fetch(`${link.api}/top-sales`);
 
@@ -11,7 +13,7 @@ export default class fetchApi {
     }
     return await res.json();
   };
-
+    
   getFirstItems = async () => {
     let res = await fetch(`${link.api}/items`);
 
@@ -23,19 +25,19 @@ export default class fetchApi {
 
     return await res.json();
   };
-
+ 
   getItems = async (request) => {
     const url = new URL(`${link.api}/items`)
-    if (request.search) {
-       url.searchParams.set('q', request.search)
+    if (request.searchText.length > 0) {
+       url.searchParams.set('q', request.searchText)
     }
     if (request.categoryID) {
       url.searchParams.set('categoryId', request.categoryID)
     }
-    if (request.offset) {
+    else {
       url.searchParams.set('offset', request.offset)
     }
-    console.log(url.href)
+
     let res = await fetch(url.href);  
 
     if (!res.ok) {
@@ -43,7 +45,7 @@ export default class fetchApi {
         `Could not fetch ${url.href}, status: ${res.status}`
       );
     }
-    console.log(res)
+    //console.log(res)
 
     return await res.json();
   };
