@@ -28,7 +28,15 @@ const serviceCatalogReducer = (state = initialState, action) => {
           ...state.params,
           searchText: action.payload.searchText,
         },
-          };
+      }
+    case actions.SET_OFFSET:
+      return {
+        ...state,
+        params: {
+          ...state.params,
+          offset: state.params.offset + 6
+        }
+      }
     default:
       return state;
   }

@@ -25,8 +25,9 @@ export default class fetchApi {
 
     return await res.json();
   };
- 
-  getItems = async (request) => {
+  
+ getItems = async (request) => {
+    
     const url = new URL(`${link.api}/items`)
     if (request.searchText.length > 0) {
        url.searchParams.set('q', request.searchText)
@@ -48,8 +49,8 @@ export default class fetchApi {
     //console.log(res)
 
     return await res.json();
-  };
-  
+};
+
 
   getCategories = async () => {
     let res = await fetch(`${link.api}/categories`);

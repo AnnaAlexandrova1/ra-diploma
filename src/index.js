@@ -10,7 +10,7 @@ import fetchApi from "./api/fetchApi";
 
 const fetchAPI = new fetchApi()
 
-fetchAPI.getCatalog({}).then((result) => console.log(result))
+//fetchAPI.getCatalog({}).then((result) => console.log(result))
 
 
 
