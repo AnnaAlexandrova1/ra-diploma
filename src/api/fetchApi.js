@@ -24,14 +24,23 @@ export default class fetchApi {
     return await res.json();
   };
 
-  getItems = async (categoryID, offset, search) => {
-    
-
-    let res = await fetch(`${link.api}/items?categoryId=${categoryID}&offset=${offset}&q=${search}`);  
+  getItems = async (request) => {
+    const url = new URL(`${link.api}/items`)
+    if (request.search) {
+       url.searchParams.set('q', request.search)
+    }
+    if (request.categoryID) {
+      url.searchParams.set('categoryId', request.categoryID)
+    }
+    if (request.offset) {
+      url.searchParams.set('offset', request.offset)
+    }
+    console.log(url.href)
+    let res = await fetch(url.href);  
 
     if (!res.ok) {
       throw new Error(
-        `Could not fetch ${link.api}/items, status: ${res.status}`
+        `Could not fetch ${url.href}, status: ${res.status}`
       );
     }
     console.log(res)

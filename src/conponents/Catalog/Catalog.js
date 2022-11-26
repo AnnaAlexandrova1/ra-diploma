@@ -4,6 +4,8 @@ import Card from "./Card/Card";
 import Preloader from "../Preloader/Preloader";
 import CatalogCategories from "./CatalogCategories";
 import CatalogList from "./CatalogList";
+import * as actionsPayload from '../../actions/actionsPayload'
+
 
 import "./catalog.css";
 
@@ -11,23 +13,24 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export default function Catalog() {
-  const [searchValue, setSearchValue] = useState('')
+  
   const [error, setError] = useState(false)
-
+  const dispatch = useDispatch()
+  const {isSearch, params } = useSelector(state => state.serviceCatalog)
   const fetchAPI = new fetchApi()
 
-  const onSearch = (evt) => {
-    setSearchValue(searchValue => evt.target.value)
-    fetchAPI.search(evt.target.value).then(searchResult).catch(onError)
-  }
+  // const onSearch = (evt) => {
+  //   setSearchValue(searchValue => evt.target.value)
+  //   fetchAPI.search(evt.target.value).then(searchResult).catch(onError)
+  // }
  
-  const searchResult = (char) => {
-     console.log(char)
-   }
+  // const searchResult = (char) => {
+  //    console.log(char)
+  //  }
 
-  const onError = () => {
-     setError(true)
-  }
+  // const onError = () => {
+  //    setError(true)
+  // }
   
   return (
     <section className="catalog">
@@ -35,8 +38,11 @@ export default function Catalog() {
       <form className="catalog-search-form form-inline"
         >
         <input className="form-control" placeholder="Поиск"
-          onChange={onSearch}
-          value={searchValue}
+          onChange={(evt) => {console.log(evt.target.value)
+            dispatch(actionsPayload.inputSearch(evt.target.value))
+          }
+          }
+          value={params.searchText}
         />
       </form>
       <CatalogCategories />

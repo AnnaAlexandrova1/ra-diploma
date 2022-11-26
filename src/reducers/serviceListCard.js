@@ -7,7 +7,7 @@ const initialState = {
     qty: 0,
 }
 
-const reducer = (state = initialState, action) => {
+const serviceListCardReducer = (state = initialState, action) => {
     
     switch (action.type) {
         case actions.ADD_ITEM:
@@ -25,4 +25,4 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-export default reducer;
+export default serviceListCardReducer;

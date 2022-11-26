@@ -1,11 +1,15 @@
-import { findByTestId } from "@testing-library/react";
+
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import fetchApi from "../../api/fetchApi";
+
+import * as actionsPayload from '../../actions/actionsPayload'
 
 export default function CatalogCategories() {
   const [list, setList] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
 
   const fetchAPI = new fetchApi();
 
@@ -28,7 +32,8 @@ export default function CatalogCategories() {
 
   const catList = list.map((i) => {
     return (
-      <li className="nav-item" key={i.id}>
+      <li className="nav-item" key={i.id}
+      onClick={()=> dispatch(actionsPayload.changeCategory(i.title))}>
         <a className="nav-link" href="#">
           {i.title}
         </a>

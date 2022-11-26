@@ -16,9 +16,9 @@ import store from "../../store/index";
 import "./App.css";
 
 function App() {
-  // const dispatch = useDispatch()
-  // const id = useSelector(state => state.itemId)
-  // console.log(id)
+  //const dispatch = useDispatch()
+  const id = useSelector((state) => state.serviceCatalog)
+  console.log(id)
   
   return (
     <div className="App">

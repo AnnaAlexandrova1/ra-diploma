@@ -9,7 +9,7 @@ import store from "./store";
 import fetchApi from "./api/fetchApi";
 
 const fetchAPI = new fetchApi()
-fetchAPI.getItems(13, 0, 'кеды').then((result) => console.log(result))
+fetchAPI.getItems({offset:6, search:'туфли' }).then((result) => console.log(result))
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
