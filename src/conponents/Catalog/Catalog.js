@@ -5,16 +5,12 @@ import Preloader from "../Preloader/Preloader";
 import CatalogCategories from "./CatalogCategories";
 import CatalogList from "./CatalogList";
 import * as actionsPayload from '../../actions/actionsPayload'
-
-
 import "./catalog.css";
-
 import { useDispatch, useSelector } from "react-redux";
 
 
 export default function Catalog() {
   const [error, setError] = useState(false)
-
   const dispatch = useDispatch()
   const {isSearch, params } = useSelector(state => state.serviceCatalog)
   const fetchAPI = new fetchApi()

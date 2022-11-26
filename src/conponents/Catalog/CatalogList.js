@@ -14,7 +14,7 @@ export default function CatalogList() {
 
   const fetchAPI = new fetchApi();
   const { isSearch, params } = useSelector(state => state.serviceCatalog)
-  fetchAPI.getItems(params).then((result) => console.log(result))
+  //fetchAPI.getItems(params).then((result) => console.log(result))
 
   useEffect(() => {
     updateCatalog();
@@ -23,13 +23,14 @@ export default function CatalogList() {
   //загружаем первые 6 картинок
   useEffect(() => {
     getFirstItems()
-  }, [])
+  }, [params.categoryID, params.searchText])
   
   const getFirstItems = () => {
-    fetchAPI.getFirstItems().then(onFirtItemsLoaded).catch(onError)
+    fetchAPI.getItems(params).then(onFirtItemsLoaded).catch(onError)
   }
   
   const onFirtItemsLoaded = (charlist) => {
+    console.log(charlist)
     setItems(charlist)
     setLoading(false);
     setNewItemLoading(newItemLoading => false);
