@@ -3,47 +3,21 @@ import fetchApi from "../../api/fetchApi";
 import Card from "./Card/Card";
 import Preloader from "../Preloader/Preloader";
 import { useDispatch, useSelector } from "react-redux";
+import { useHttp } from "../../hooks/http.hook";
+
+import { fetchShoes } from "../../actions";
 
 export default function CatalogList() {
+  const activeCategory = useSelector(state => state.categoryes.activeCategory)
   const dispatch = useDispatch()
-  // const fetchAPI = new fetchApi()
-  // const {loading, error, items} = useSelector((state) => state.serviceItemsList)
-  // const { isSearch, params} = useSelector((state) => state.serviceCatalog)
+  const request = useHttp()
+
+  useEffect(() => {
+    dispatch(fetchShoes(request, url))
+  }, [])
  
-  // useEffect(() => {
-  //   fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
-  // }, [dispatch])
-  
-  // useEffect(() => {
-  //     fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
-  // }, [params.categoryID])
+ // вот тут продолжить. Попробовать сделать url через formData
 
-  // const onError = (err) => {
-  //    console.log(err)
-  // }
-
-  // const updateCatalog = () => {
-  //   dispatch(actionsPayload.setOffset())
-  //   fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setMoreItems(res))).catch(onError)
-  // }
-    
-
-  
-  // const list = items.map((item) => {
-  //   return (
-  //     <Card
-  //       key={item.id}
-  //       id={item.id}
-  //       category={item.category}
-  //       title={item.title}
-  //       images={item.images}
-  //       price={item.price}
-  //     />
-  //   );
-  // });
-
-  // const catalogList = !(loading || error || !items) ? list : null;
-  // const preloader = loading ? <Preloader /> : null;
 
   return (
     <>

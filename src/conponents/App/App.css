@@ -213,6 +213,7 @@ section {
 }
 .catalog-item-card {
   margin-bottom: 1em;
+  width: 100%;
 }
 
 .catalog-item-size {
@@ -252,6 +253,8 @@ section {
 .card.catalog-item-card {
     min-height: 620px;
     position:relative;
+    width: 350px
+    
 }
 
 .align-space-between{

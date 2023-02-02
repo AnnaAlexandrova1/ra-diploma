@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../api/fetchApi";
-import { fetchCategory } from "../../actions";
+import { fetchCategory, activeCategoryChanged } from "../../actions";
 import { useHttp } from "../../hooks/http.hook";
+import classNames from "classnames";
 
 import Preloader from "./../Preloader/Preloader";
 import Error from "./../Error/Error";
@@ -18,8 +19,6 @@ export default function CatalogCategories() {
     dispatch(fetchCategory(request));
   }, []);
 
-  // вот тут продолжить
-
   if (categoryLoadingStatus === "loading") {
     return <Preloader />;
   } else if (categoryLoadingStatus === "error") {
@@ -29,21 +28,25 @@ export default function CatalogCategories() {
   const renderCategory = (arr) => {
     if (arr.length === 0) {
       return (
-        <a className="nav-link active" href="#">
+        <a className="nav-link" href="#">
           Фильтры не найдены
         </a>
       );
     }
     return arr.map((i) => {
+      const itemClass = classNames("nav-link", {
+        active: i.title === activeCategory.name,
+      });
+
       return (
         <li
           className="nav-item"
           key={i.id}
-          // onClick={() => {
-          //   dispatch(actionsPayload.changeCategory(i.id))
-          // }}
+          onClick={() => {
+            dispatch(activeCategoryChanged({ name: i.title, id: i.id }));
+          }}
         >
-          <a className="nav-link" href="#">
+          <a className={itemClass} href="#">
             {i.title}
           </a>
         </li>
@@ -52,13 +55,17 @@ export default function CatalogCategories() {
   };
   const categoriesList = renderCategory(categoryes);
 
+  const itemClassAll = classNames("nav-link", {
+    active: activeCategory.name === "all",
+  });
+
   return (
     <ul className="catalog-categories nav justify-content-center add-width">
       <li
         className="nav-item"
-        // onClick={() => dispatch(actionsPayload.selectAllCategory())}
+        onClick={() => dispatch(activeCategoryChanged({ name: "all", id: '' }))}
       >
-        <a className="nav-link active" href="#">
+        <a className={itemClassAll} href="#">
           Все
         </a>
       </li>

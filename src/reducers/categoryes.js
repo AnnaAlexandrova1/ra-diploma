@@ -1,7 +1,11 @@
 const initialState = {
     categoryes: [],
     categoryLoadingStatus: 'idle',
-    activeCategory: 'all'
+    activeCategory: {
+        name: 'all',
+        id: ''
+    }
+    
 }
 
 const categoryes = (state = initialState, action) => {
@@ -25,7 +29,7 @@ const categoryes = (state = initialState, action) => {
         case 'ACTIVE_CATEGORY_CHANGED':
             return {
                 ...state,
-                activeCategory: action.payload
+                activeCategory: {...state.activeCategory, name: action.payload.name, id: action.payload.id }
             }
         default: return state
     }
