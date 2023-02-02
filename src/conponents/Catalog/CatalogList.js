@@ -3,61 +3,62 @@ import fetchApi from "../../api/fetchApi";
 import Card from "./Card/Card";
 import Preloader from "../Preloader/Preloader";
 import { useDispatch, useSelector } from "react-redux";
-import * as actionsPayload from '../../actions/actionsPayload'
 
 export default function CatalogList() {
   const dispatch = useDispatch()
-  const fetchAPI = new fetchApi()
-  const {loading, error, items} = useSelector((state) => state.serviceItemsList)
-  const { isSearch, params} = useSelector((state) => state.serviceCatalog)
+  // const fetchAPI = new fetchApi()
+  // const {loading, error, items} = useSelector((state) => state.serviceItemsList)
+  // const { isSearch, params} = useSelector((state) => state.serviceCatalog)
  
-  useEffect(() => {
-    fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
-  }, [dispatch])
+  // useEffect(() => {
+  //   fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
+  // }, [dispatch])
   
-  useEffect(() => {
-      fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
-  }, [params.categoryID])
+  // useEffect(() => {
+  //     fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
+  // }, [params.categoryID])
 
-  const onError = (err) => {
-     console.log(err)
-  }
+  // const onError = (err) => {
+  //    console.log(err)
+  // }
 
-  const updateCatalog = () => {
-    dispatch(actionsPayload.setOffset())
-    fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setMoreItems(res))).catch(onError)
-  }
+  // const updateCatalog = () => {
+  //   dispatch(actionsPayload.setOffset())
+  //   fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setMoreItems(res))).catch(onError)
+  // }
     
 
   
-  const list = items.map((item) => {
-    return (
-      <Card
-        key={item.id}
-        id={item.id}
-        category={item.category}
-        title={item.title}
-        images={item.images}
-        price={item.price}
-      />
-    );
-  });
+  // const list = items.map((item) => {
+  //   return (
+  //     <Card
+  //       key={item.id}
+  //       id={item.id}
+  //       category={item.category}
+  //       title={item.title}
+  //       images={item.images}
+  //       price={item.price}
+  //     />
+  //   );
+  // });
 
-  const catalogList = !(loading || error || !items) ? list : null;
-  const preloader = loading ? <Preloader /> : null;
+  // const catalogList = !(loading || error || !items) ? list : null;
+  // const preloader = loading ? <Preloader /> : null;
 
   return (
     <>
-      {preloader}
-      <div className="row align-space-between">{catalogList}</div>
+      {/* {preloader} */}
+      <div className="row align-space-between">
+        {/* {catalogList} */}
+      </div>
       <div className="text-center">
         <button className="btn btn-outline-primary add-margin-bottom"
           // disabled = {newItemLoading}
-          onClick={() => {
-            updateCatalog()
-          }}
+          // onClick={() => {
+          //   updateCatalog()
+          // }}
         >
-          {preloader}
+          {/* {preloader} */}
           Загрузить ещё</button>
       </div>
     </>

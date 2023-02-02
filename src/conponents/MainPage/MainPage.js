@@ -8,7 +8,7 @@ export default function MainPage() {
       <TopSales />
       <h2 className="text-center">Каталог</h2>
       <CatalogCategories />
-      <CatalogList />
+      {/* <CatalogList /> */}
     </>
   );
 }

@@ -1,26 +1,37 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTopSalesRequest } from "../../../reducers/topSalesSlice";
+import { getTopSales } from "../../../api/fetchApi";
 import Card from "../../Catalog/Card/Card"
 import Error from "../../Error/Error";
 import Preloader from "../../Preloader/Preloader";
 
 
 export default function TopSales() {
-  const dispatch = useDispatch()
-  const { products, loading, error } = useSelector((store) => store.topSalesSlice)
+  const [topList, setTopList] = useState([])
+  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const getTopSalesList = () => {
+    getTopSales().then(onListLoaded).catch(onError)
+  }
 
   useEffect(() => {
-    dispatch(getTopSalesRequest)
-  }, [dispatch])
-  
-  const repeatRequestHandler = (evt) => {
-    evt.preventDefault()
-    dispatch(getTopSalesRequest())
+    getTopSalesList()
+  }, [])
+
+  const onListLoaded = (res) => {
+    setLoading(false)
+    setTopList(res)
   }
-  if (products.length === 0 &&
-    loading === 'idle' &&
-    error === null) {
+  
+  const onError = () => {
+    setLoading(false)
+    setError(true)
+  }
+  
+  if (topList.length === 0 &&
+    loading === false &&
+    error === false) {
     return null
   }
 
@@ -28,18 +39,18 @@ export default function TopSales() {
     return (
       <section className="top-sales">
         <h2 className="text-center">Хиты продаж!</h2>
-        <Error message='Произошла ошибка!' repeatRequestHandler={repeatRequestHandler} />
+        <Error message='Произошла ошибка!'/>
       </section>
     )
   }
 
-  //console.log(topList);
+
   return (
      <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
       {loading === 'pending' ? <Preloader /> : (
         <div className="row">
-          {products.map((product) => {
+          {topList.map((product) => {
             return (
               <div className="col-4" key={product.id}>
                 <Card 

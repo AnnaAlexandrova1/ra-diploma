@@ -10,29 +10,24 @@ import Shoppingbag from "../Shoppingbag/Shoppingbag";
 import Error from "../Error/Error"
 
 import { useDispatch, useSelector } from "react-redux";
-import { Provider } from "react-redux";
-import store from "../../store/index";
 
 import "./App.css";
 
 function App() {
-  //const dispatch = useDispatch()
-  const {isSearch, params} = useSelector((state) => state.serviceCatalog)
-  const itemsList = useSelector(state => state.serviceItemsList)
-  console.log(isSearch, params)
-  //console.log(itemsList)
+  // const {isSearch, params} = useSelector((state) => state.serviceCatalog)
+  // const itemsList = useSelector(state => state.serviceItemsList)
+
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route path="catalog" element={
-            <Catalog />}/>
+          {/* <Route path="catalog" element={<Catalog />}/>
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
           <Route path='catalog/:id' element={<ItemPage />} />
           <Route path='cart' element={<Shoppingbag />} />
-          <Route path='*' element={<Error />} />
+          <Route path='*' element={<Error />} /> */}
         </Route>
       </Routes>
     </div>

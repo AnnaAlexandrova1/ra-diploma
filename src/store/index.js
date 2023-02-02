@@ -1,20 +1,13 @@
-
-import { configureStore } from '@reduxjs/toolkit';
-import serviceListCardReducer from '../reducers/serviceListCard'
-import serviceCatalogReducer from '../reducers/serviceCatalog'
-import serviceItemsListReducer from '../reducers/serviceItemsList'
-import topSalesSlice from '../reducers/topSalesSlice'
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import filters from '../reducers/testreducer';
+import thunk from 'redux-thunk'
 
 
 const store = configureStore({
     reducer: {
-        serviceListCard: serviceListCardReducer,
-        serviceCatalog: serviceCatalogReducer, 
-        serviceItemsList: serviceItemsListReducer,
-        topSalesSlice: topSalesSlice,
+        filters: filters
     }
 });
  
-//const {dispatch, subscribe, getState} = store;
 
 export default store;
