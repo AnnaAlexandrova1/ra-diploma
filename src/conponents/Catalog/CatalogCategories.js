@@ -1,52 +1,61 @@
-
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../api/fetchApi";
+import { fetchCategory } from "../../actions";
+import { useHttp } from "../../hooks/http.hook";
 
+import Preloader from "./../Preloader/Preloader";
+import Error from "./../Error/Error";
 
 export default function CatalogCategories() {
-  const [list, setList] = useState([]);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  // const dispatch = useDispatch()
-
+  const { categoryes, categoryLoadingStatus, activeCategory } = useSelector(
+    (state) => state.categoryes
+  );
+  const dispatch = useDispatch();
+  const { request } = useHttp();
 
   useEffect(() => {
-    updateCategories();
+    dispatch(fetchCategory(request));
   }, []);
 
-  const updateCategories = () => {
-    getCategories().then(onCategoriesLoaded).catch(onError);
-  };
+  // вот тут продолжить
 
-  const onCategoriesLoaded = (char) => {
-    setList(char);
-    setLoading(false);
-  };
+  if (categoryLoadingStatus === "loading") {
+    return <Preloader />;
+  } else if (categoryLoadingStatus === "error") {
+    return <Error />;
+  }
 
-  const onError = () => {
-    setError(true);
-  };
-
-  const catList = list.map((i) => {
-    return (
-      <li className="nav-item" key={i.id}
-        // onClick={() => {
-        //   dispatch(actionsPayload.changeCategory(i.id))
-        // }}
-      >
-        <a className="nav-link" href="#">
-          {i.title}
+  const renderCategory = (arr) => {
+    if (arr.length === 0) {
+      return (
+        <a className="nav-link active" href="#">
+          Фильтры не найдены
         </a>
-      </li>
-    );
-  });
-
-  const categoriesList = !(loading || error || !list) ? catList : null;
+      );
+    }
+    return arr.map((i) => {
+      return (
+        <li
+          className="nav-item"
+          key={i.id}
+          // onClick={() => {
+          //   dispatch(actionsPayload.changeCategory(i.id))
+          // }}
+        >
+          <a className="nav-link" href="#">
+            {i.title}
+          </a>
+        </li>
+      );
+    });
+  };
+  const categoriesList = renderCategory(categoryes);
 
   return (
     <ul className="catalog-categories nav justify-content-center add-width">
-      <li className="nav-item"
+      <li
+        className="nav-item"
         // onClick={() => dispatch(actionsPayload.selectAllCategory())}
       >
         <a className="nav-link active" href="#">
