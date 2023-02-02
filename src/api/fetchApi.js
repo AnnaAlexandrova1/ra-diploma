@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import link from "./link";
 
 export default class fetchApi {
@@ -6,12 +5,7 @@ export default class fetchApi {
   getTopSales = async () => {
     let res = await fetch(`${link.api}/top-sales`);
 
-    if (!res.ok) {
-      throw new Error(
-        `Could not fetch ${link.api}/top-sales, status: ${res.status}`
-      );
-    }
-    return await res.json();
+    
   };
     
   getFirstItems = async () => {
@@ -25,7 +19,7 @@ export default class fetchApi {
 
     return await res.json();
   };
-  
+
  getItems = async (request) => {
     
     const url = new URL(`${link.api}/items`)
@@ -118,4 +112,26 @@ export default class fetchApi {
     //   );
     //}
   };
+}
+
+
+export const fetchTopSales = async (rejectWithValue) => {
+  try {
+    const responce = await fetch(`${link.api}/top-sales`, {
+      method: 'GET'
+    });
+
+    if (!responce.ok) {
+      throw new Error(
+        `Could not fetch ${link.api}/top-sales, status: ${responce.status}`
+      );
+    }
+    const j = await responce.json()
+    console.log(j)
+    return await responce.json();
+  }
+    catch (err) {
+      return rejectWithValue(err.message)
+    }
+  
 }

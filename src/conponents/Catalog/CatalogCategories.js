@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import fetchApi from "../../api/fetchApi";
 
 import * as actionsPayload from '../../actions/actionsPayload'
@@ -33,7 +33,9 @@ export default function CatalogCategories() {
   const catList = list.map((i) => {
     return (
       <li className="nav-item" key={i.id}
-      onClick={()=> dispatch(actionsPayload.changeCategory(i.id))}>
+        onClick={() => {
+          dispatch(actionsPayload.changeCategory(i.id))
+        }}>
         <a className="nav-link" href="#">
           {i.title}
         </a>
@@ -45,7 +47,8 @@ export default function CatalogCategories() {
 
   return (
     <ul className="catalog-categories nav justify-content-center add-width">
-      <li className="nav-item">
+      <li className="nav-item"
+      onClick={() => dispatch(actionsPayload.selectAllCategory())}>
         <a className="nav-link active" href="#">
           Все
         </a>

@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import serviceListCardReducer from '../reducers/serviceListCard'
 import serviceCatalogReducer from '../reducers/serviceCatalog'
 import serviceItemsListReducer from '../reducers/serviceItemsList'
+import topSalesSlice from '../reducers/topSalesSlice'
 
 
 const store = configureStore({
@@ -10,6 +11,7 @@ const store = configureStore({
         serviceListCard: serviceListCardReducer,
         serviceCatalog: serviceCatalogReducer, 
         serviceItemsList: serviceItemsListReducer,
+        topSalesSlice: topSalesSlice,
     }
 });
  

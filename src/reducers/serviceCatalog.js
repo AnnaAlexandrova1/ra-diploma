@@ -20,6 +20,14 @@ const serviceCatalogReducer = (state = initialState, action) => {
           categoryID: action.payload.categoryID,
         }
       }
+    case actions.SELECT_ALL_CATEGORY:
+      return {
+        ...state,
+        params: {
+          ...state.params,
+          categoryID: null,
+        }
+      }
       case actions.INPUT_SEARCH:
           return {
         ...state,

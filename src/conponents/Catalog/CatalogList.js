@@ -6,65 +6,31 @@ import { useDispatch, useSelector } from "react-redux";
 import * as actionsPayload from '../../actions/actionsPayload'
 
 export default function CatalogList() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [newItemLoading, setNewItemLoading] = useState(false);
-  const [itemsEnded, setItemsEnded] = useState(false)
-
-  const dispatch = useDispatch();
-  const fetchAPI = new fetchApi();
-  const { isSearch, params } = useSelector(state => state.serviceCatalog)
-  const itemsList = useSelector(state => state.serviceItemsList)
-
-  // useEffect(() => {
-  //   updateCatalog();
-  // }, []);
+  const dispatch = useDispatch()
+  const fetchAPI = new fetchApi()
+  const {loading, error, items} = useSelector((state) => state.serviceItemsList)
+  const { isSearch, params} = useSelector((state) => state.serviceCatalog)
  
-  //загружаем первые 6 картинок
-
-   const getFirstItems = () => {
-    fetchAPI.getItems(params).then(onFirtItemsLoaded).catch(onError)
-  }
-
   useEffect(() => {
-    getFirstItems()
-  }, [])
+    fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
+  }, [dispatch])
   
- 
-  
-  const onFirtItemsLoaded = (charlist) => {
-    dispatch(actionsPayload.setItems(charlist))
-    setLoading(false);
-    setNewItemLoading(newItemLoading => false);
-  }
+  useEffect(() => {
+      fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setItems(res))).catch(onError)
+  }, [params.categoryID])
 
-  const onItemsListLoading = () => {
-     setNewItemLoading(true)
+  const onError = (err) => {
+     console.log(err)
   }
 
   const updateCatalog = () => {
     dispatch(actionsPayload.setOffset())
-    fetchAPI.getItems(params).then(onCatalogLoaded).catch(onError);
-  };
-
-  const onCatalogLoaded = (charlist) => {
-    let ended = false; //если длина пришедшего массива будет меньше 6, то можно заблокировать кнопку загрузить еще
+    fetchAPI.getItems(params).then((res) => dispatch(actionsPayload.setMoreItems(res))).catch(onError)
+  }
     
-    if (charlist.length < 6) {
-      ended = true;
-    }
-    dispatch(actionsPayload.setItems(charlist))
-    setLoading(false);
-    setNewItemLoading(newItemLoading => false);
-    setItemsEnded(itemsEnded => ended)
-  };
 
-  const onError = () => {
-    setError(true);
-    setLoading(false);
-  };
-
-  const list = itemsList.map((item) => {
+  
+  const list = items.map((item) => {
     return (
       <Card
         key={item.id}
@@ -77,7 +43,7 @@ export default function CatalogList() {
     );
   });
 
-  const catalogList = !(loading || error || !itemsList) ? list : null;
+  const catalogList = !(loading || error || !items) ? list : null;
   const preloader = loading ? <Preloader /> : null;
 
   return (
@@ -86,8 +52,10 @@ export default function CatalogList() {
       <div className="row align-space-between">{catalogList}</div>
       <div className="text-center">
         <button className="btn btn-outline-primary add-margin-bottom"
-          disabled = {newItemLoading}
-          onClick={() => updateCatalog()}
+          // disabled = {newItemLoading}
+          onClick={() => {
+            updateCatalog()
+          }}
         >
           {preloader}
           Загрузить ещё</button>

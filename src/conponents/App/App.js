@@ -17,8 +17,10 @@ import "./App.css";
 
 function App() {
   //const dispatch = useDispatch()
-  const id = useSelector((state) => state.serviceCatalog)
-  
+  const {isSearch, params} = useSelector((state) => state.serviceCatalog)
+  const itemsList = useSelector(state => state.serviceItemsList)
+  console.log(isSearch, params)
+  //console.log(itemsList)
   return (
     <div className="App">
       <Routes>

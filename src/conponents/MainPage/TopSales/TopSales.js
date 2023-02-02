@@ -1,57 +1,59 @@
 import { useEffect, useState } from "react";
-import fetchApi from "../../../api/fetchApi";
+import { useDispatch, useSelector } from "react-redux";
+import { getTopSalesRequest } from "../../../reducers/topSalesSlice";
 import Card from "../../Catalog/Card/Card"
+import Error from "../../Error/Error";
 import Preloader from "../../Preloader/Preloader";
 
 
 export default function TopSales() {
-  const [items, setItems] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  const fetchAPI = new fetchApi();
+  const dispatch = useDispatch()
+  const { products, loading, error } = useSelector((store) => store.topSalesSlice)
 
   useEffect(() => {
-    updateTopSales();
-  });
+    dispatch(getTopSalesRequest)
+  }, [dispatch])
+  
+  const repeatRequestHandler = (evt) => {
+    evt.preventDefault()
+    dispatch(getTopSalesRequest())
+  }
+  if (products.length === 0 &&
+    loading === 'idle' &&
+    error === null) {
+    return null
+  }
 
-  const updateTopSales = () => {
-    fetchAPI.getTopSales().then(onItemsListLoaded).catch(onError);
-  };
-
-  const onItemsListLoaded = (charList) => {
-    setLoading(false);
-    setItems(charList);
-  };
-
-  const onError = () => {
-    setError(true);
-    setLoading(false);
-  };
-
-  const list  = items.map((item) => {
+  if (error) {
     return (
-      <Card
-        key={item.id}
-        id={item.id}
-        category={item.category}
-        title={item.title}
-        images={item.images}
-        price={item.price}
-      />
-    );
-  });
-
-  const topList = !(loading || error || !items) ? list : null;
-  const preloader = loading ? <Preloader /> : null;
-
+      <section className="top-sales">
+        <h2 className="text-center">Хиты продаж!</h2>
+        <Error message='Произошла ошибка!' repeatRequestHandler={repeatRequestHandler} />
+      </section>
+    )
+  }
 
   //console.log(topList);
   return (
-    <section className="top-sales">
+     <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
-      {preloader}
-      <div className="row align-space-between">{topList}</div>
+      {loading === 'pending' ? <Preloader /> : (
+        <div className="row">
+          {products.map((product) => {
+            return (
+              <div className="col-4" key={product.id}>
+                <Card 
+        key={product.id}
+        id={product.id}
+        category={product.category}
+        title={product.title}
+        images={product.images}
+        price={product.price} />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }
