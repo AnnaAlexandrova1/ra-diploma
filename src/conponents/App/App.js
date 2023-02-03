@@ -22,10 +22,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          {/* <Route path="catalog" element={<Catalog />}/>
+          <Route path="catalog" element={<Catalog />}/>
           <Route path="about" element={<About />} />
           <Route path="contacts" element={<Contacts />} />
-          <Route path='catalog/:id' element={<ItemPage />} />
+          {/* <Route path='catalog/:id' element={<ItemPage />} />
           <Route path='cart' element={<Shoppingbag />} />
           <Route path='*' element={<Error />} /> */}
         </Route>

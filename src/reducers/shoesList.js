@@ -1,7 +1,8 @@
 const initialState = {
     shoes: [],
     shoesLoadingStatus: 'idle',
-    offset: 0
+    offset: 0,
+    end: false
 }
 
 const shoesList = (state = initialState, action) => {
@@ -33,7 +34,8 @@ const shoesList = (state = initialState, action) => {
                 ...state,
                 offset: state.offset + 6,
                 shoes: [...state.shoes, ...action.payload],
-                shoesLoadingStatus: 'idle'
+                shoesLoadingStatus: 'idle',
+                end: action.payload.length < 6
             }
         case 'MORE_SHOES_FETCHING_ERROR':
             return {
@@ -44,7 +46,8 @@ const shoesList = (state = initialState, action) => {
             return {
                 ...state,
                 shoes: [],
-                offset: 0
+                offset: 0,
+                end: false
             }
         default: return state
     }

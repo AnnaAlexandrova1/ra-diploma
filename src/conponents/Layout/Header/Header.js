@@ -1,10 +1,15 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from "react-router-dom";
 import HeaderControls from "./HeaderControls/HeaderControls";
 
 import headerLogo from "../../../assets/img/header-logo.png";
+import { useDispatch } from "react-redux";
+import { shoesCategoryChanged, activeCategoryChanged } from "../../../actions";
 
 export default function Header() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  
   return (
     <header className="container">
       <div className="row">
@@ -15,12 +20,22 @@ export default function Header() {
             </NavLink>
             <div className="collapse navbar-collapse" id="navbarMain">
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                  <NavLink to="/">Главная</NavLink>
+                <li className="nav-item active"
+                  onClick={() => {
+                    dispatch(shoesCategoryChanged())
+                    dispatch(activeCategoryChanged({ name: "all", id: '' }))
+                    navigate("/")
+                  }}>
+                  Главная
                 </li>
 
-                <li className="nav-item">
-                  <NavLink to="/catalog">Каталог</NavLink>
+                <li className="nav-item"
+                onClick={() => {
+                  dispatch(shoesCategoryChanged())
+                  dispatch(activeCategoryChanged({ name: "all", id: '' }))
+                    navigate("/catalog")
+                  }}>
+                 Каталог
                 </li>
 
                 <li className="nav-item">
