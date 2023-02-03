@@ -10,8 +10,7 @@ import Error from "./../Error/Error";
 
 export default function CatalogCategories() {
   const { categoryes, categoryLoadingStatus, activeCategory } = useSelector(
-    (state) => state.categoryes
-  );
+    (state) => state.categoryes);
   const dispatch = useDispatch();
   const { request } = useHttp();
 

@@ -2,15 +2,16 @@ import "./card.css";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
+import { idPull } from "../../../actions";
 
 export default function Card(props) {
   const { id, category, title, images, price } = props;
 
   const dispatch = useDispatch()
-  const itemId = useSelector(state => state.itemId)
+  // const itemId = useSelector(state => state.itemId)
 
-   const addItem = (itemId) => {
-    dispatch({type: 'ADD_ITEM', payload: itemId})
+   const addItem = (id) => {
+    dispatch(idPull(id))
   }
   
   return (

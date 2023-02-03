@@ -1,10 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { searchShoesChanged } from "../../../../actions";
 
 export default function HeaderControls() {
   const [searchFocus, setSearchFocus] = useState(false);
   const [cartQuantaty, setCartQuantaty] = useState(0);
+  const dispatch = useDispatch()
+  const dataRef = useRef()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setCartQuantaty(qty);
@@ -46,8 +52,19 @@ export default function HeaderControls() {
           </div>
         </Link>
       </div>
-      <form data-id="search-form" className={drowVisibility}>
-        <input className="form-control" placeholder="Поиск" />
+      <form data-id="search-form"
+        className={drowVisibility}
+        onSubmit={(e) => {
+          e.preventDefault()
+          dispatch(searchShoesChanged(dataRef.current.value))
+          navigate("/catalog")
+        }} 
+        
+      >
+        <input className="form-control"
+          placeholder="Поиск"
+          ref={dataRef}
+        />
       </form>
     </>
   );

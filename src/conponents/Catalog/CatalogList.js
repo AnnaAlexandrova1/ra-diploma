@@ -5,38 +5,19 @@ import Error from "../Error/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 import { fetchShoes, fetchMoreShoes } from "../../actions";
+import { createUrl } from "../../api/createUrl";
 
 export default function CatalogList() {
   const { categoryes, categoryLoadingStatus, activeCategory } = useSelector(
     (state) => state.categoryes
   );
-  const { shoes, shoesLoadingStatus, offset, end } = useSelector((state) => state.shoesList);
+  const { shoes, shoesLoadingStatus, offset, end, search } = useSelector((state) => state.shoesList);
   const dispatch = useDispatch();
   const { request } = useHttp();
 
-  const createUrl = () => {
-    let url = new URLSearchParams();
-    if (activeCategory.name === "all") {
-      if (offset === 0) {
-         return "";
-      } else {
-        url.append('offset', offset)
-        return `?${url}`
-      }    
-    } else {
-      if (offset === 0) {
-        url.append("categoryId", activeCategory.id);
-        return `?${url}`;
-      } else {
-        url.append("categoryId", activeCategory.id);
-        url.append('offset', offset)
-        return `?${url}`
-      }
-    }
-  };
   
   useEffect(() => {
-    dispatch(fetchShoes(request, createUrl()));
+    dispatch(fetchShoes(request, createUrl(activeCategory.name, offset, activeCategory.id, search)));
   }, [activeCategory.name]);
 
   if (categoryLoadingStatus === "loading") {
@@ -74,7 +55,7 @@ export default function CatalogList() {
           className="btn btn-outline-primary add-margin-bottom"
           disabled = {shoesLoadingStatus !== "idle" || end}
           onClick={() => {
-            dispatch(fetchMoreShoes(request, createUrl()))
+            dispatch(fetchMoreShoes(request, createUrl(activeCategory.name, offset, activeCategory.id, search)))
           }}
         >
           Загрузить ещё

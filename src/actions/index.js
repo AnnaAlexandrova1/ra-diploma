@@ -21,6 +21,13 @@ export const fetchMoreShoes = (request, url) => (dispatch) => {
         .catch(() => dispatch(moreShoesFetchingError()))
 }
 
+export const fetchitemId = (request, id) => (dispatch) => {
+    dispatch(itemIdFetching());
+    request(`${link.api}/items/${id}`)
+        .then(data => dispatch(itemIdFetched(data)))
+        .catch(() => dispatch(itemIdFetchingError()))
+}
+
 
 export const categoryFetching = () => {
     return {
@@ -89,5 +96,39 @@ export const moreShoesFetchingError = () => {
 export const shoesCategoryChanged = () => {
     return {
         type: 'SHOES_CATEGORY_CHANGED',
+    }
+}
+
+export const searchShoesChanged = (search) => {
+    return {
+        type: 'SHOES_SEARCH_CHANGED',
+        payload: search
+    }
+}
+
+
+export const itemIdFetching = () => {
+    return {
+        type: 'ITEMID_FETCHING',
+    }
+}
+
+export const itemIdFetched = (data) => {
+    return {
+        type: 'ITEMID_FETCHED',
+        payload: data
+    }
+}
+
+export const itemIdFetchingError = () => {
+    return {
+        type: 'ITEMID_FETCHING_ERROR'
+    }
+}
+
+export const idPull = (id) => {
+    return {
+        type: 'ID_PULL',
+        payload: id
     }
 }

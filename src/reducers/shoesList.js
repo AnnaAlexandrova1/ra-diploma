@@ -2,7 +2,8 @@ const initialState = {
     shoes: [],
     shoesLoadingStatus: 'idle',
     offset: 0,
-    end: false
+    end: false,
+    search: ''
 }
 
 const shoesList = (state = initialState, action) => {
@@ -48,6 +49,11 @@ const shoesList = (state = initialState, action) => {
                 shoes: [],
                 offset: 0,
                 end: false
+            }
+        case 'SHOES_SEARCH_CHANGED':
+            return {
+                ...state,
+                search: action.payload
             }
         default: return state
     }

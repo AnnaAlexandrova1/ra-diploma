@@ -1,47 +1,36 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import fetchApi from "../../api/fetchApi";
 import ItemInfo from "./ItemInfo";
 import Preloader from "../Preloader/Preloader";
-import { useDispatch, useSelector } from "react-redux";
+import Error from "../Error/Error";
+import { useHttp } from "../../hooks/http.hook";
+import { fetchitemId } from "../../actions";
 
 export default function ItemPage() {
-  const [item, setItem] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const fetchAPI = new fetchApi();
+  const { id, itemLoadingStatus, item } = useSelector((state) => state.itemId)
+  const dispatch = useDispatch();
+  const { request } = useHttp();
 
   useEffect(() => {
-    getItemInfo();
+    dispatch(fetchitemId(request, id))
   }, []);
 
-  const itemId = useSelector((state) => state.itemId);
-  // const bag = useSelector((state) => state.shoppingBag);
-  // console.log(bag)
+  // console.log(id)
+  // console.log(item)
 
-  const getItemInfo = () => {
-    fetchAPI.getItemInfo(itemId).then(renderItemInfo).catch(onError);
-  };
+  if (itemLoadingStatus === "loading") {
+    return <Preloader />;
+  } else if (itemLoadingStatus === "error") {
+    return <Error />;
+  }
 
-  const renderItemInfo = (char) => {
-    setItem(char);
-    setLoading(false);
-  };
-
-  const onError = () => {
-    setError(true);
-    setLoading(false);
-  };
-
-  const itemPage = !(loading || error || !item) ? (
-    <ItemInfo productInfo={item} />
-  ) : null;
-  const preloader = loading ? <Preloader /> : null;
-  //console.log(item)
   return (
     <section className="catalog-item">
-      {itemPage}
-      {preloader}
+    <ItemInfo productInfo={item} />
     </section>
   );
 }
+
+
