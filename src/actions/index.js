@@ -9,7 +9,7 @@ export const fetchCategory = (request) => (dispatch) => {
 
 export const fetchShoes = (request, url) => (dispatch) => {
     dispatch(shoesFetching());
-    request(url)
+    request(`${link.api}/items${url}`)
         .then(data => dispatch(shoesFetched(data)))
         .catch(() => dispatch(shoesFetchingError()))
 }
