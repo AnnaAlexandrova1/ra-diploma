@@ -1,35 +1,51 @@
 import { useState, useEffect } from "react";
 import fetchApi from "../../api/fetchApi";
+import { moreShoesFetching } from "../../actions";
 import Card from "./Card/Card";
 import Preloader from "../Preloader/Preloader";
 import Error from "../Error/Error";
 import { useDispatch, useSelector } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 
-import { fetchShoes } from "../../actions";
+import { fetchShoes, fetchMoreShoes } from "../../actions";
 
 export default function CatalogList() {
   const { categoryes, categoryLoadingStatus, activeCategory } = useSelector(
     (state) => state.categoryes
   );
-  const { shoes, shoesLoadingStatus } = useSelector((state) => state.shoesList);
+  const { shoes, shoesLoadingStatus, offset } = useSelector((state) => state.shoesList);
   const dispatch = useDispatch();
   const { request } = useHttp();
 
   const createUrl = () => {
+    let url = new URLSearchParams();
     if (activeCategory.name === "all") {
-      return "";
+      if (offset === 0) {
+         return "";
+      } else {
+        url.append('offset', offset)
+        return `?${url}`
+      }    
     } else {
-      let url = new URLSearchParams();
-      url.append("categoryId", activeCategory.id);
-      return `?${url}`;
+      if (offset === 0) {
+        url.append("categoryId", activeCategory.id);
+        return `?${url}`;
+      } else {
+        url.append("categoryId", activeCategory.id);
+        url.append('offset', offset)
+        return `?${url}`
+      }
     }
   };
-  console.log(shoes);
+  console.log(createUrl());
 
   useEffect(() => {
     dispatch(fetchShoes(request, createUrl()));
   }, [activeCategory.name]);
+
+  //   useEffect(() => {
+  //   dispatch(fetchMoreShoes(request, createUrl()));
+  // }, [offset]);
 
   if (categoryLoadingStatus === "loading") {
     return <Preloader />;
@@ -64,10 +80,10 @@ export default function CatalogList() {
       <div className="text-center">
         <button
           className="btn btn-outline-primary add-margin-bottom"
-          // disabled = {newItemLoading}
-          // onClick={() => {
-          //   updateCatalog()
-          // }}
+          disabled = {shoesLoadingStatus !== "idle"}
+          onClick={() => {
+            dispatch(fetchMoreShoes(request, createUrl()))
+          }}
         >
           {/* {preloader} */}
           Загрузить ещё

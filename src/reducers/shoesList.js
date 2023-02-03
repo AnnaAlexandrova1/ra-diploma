@@ -1,6 +1,7 @@
 const initialState = {
     shoes: [],
-    shoesLoadingStatus: 'idle'
+    shoesLoadingStatus: 'idle',
+    offset: 0
 }
 
 const shoesList = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const shoesList = (state = initialState, action) => {
         case 'SHOES_FETCHED':
             return {
                 ...state,
+                offset: state.offset + 6,
                 shoes: action.payload,
                 shoesLoadingStatus: 'idle'
             }
@@ -20,6 +22,29 @@ const shoesList = (state = initialState, action) => {
             return {
                 ...state,
                 shoesLoadingStatus: 'error'
+            }
+        case 'MORE_SHOES_FETCHING':
+            return {
+                ...state,
+                //offset: state.offset + 6
+            }
+         case 'MORE_SHOES_FETCHED':
+            return {
+                ...state,
+                offset: state.offset + 6,
+                shoes: [...state.shoes, ...action.payload],
+                shoesLoadingStatus: 'idle'
+            }
+        case 'MORE_SHOES_FETCHING_ERROR':
+            return {
+                ...state,
+                shoesLoadingStatus: 'error'
+            }
+        case 'SHOES_CATEGORY_CHANGED':
+            return {
+                ...state,
+                shoes: [],
+                offset: 0
             }
         default: return state
     }

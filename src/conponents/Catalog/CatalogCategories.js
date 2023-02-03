@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../api/fetchApi";
-import { fetchCategory, activeCategoryChanged } from "../../actions";
+import { fetchCategory, activeCategoryChanged, shoesCategoryChanged } from "../../actions";
 import { useHttp } from "../../hooks/http.hook";
 import classNames from "classnames";
 
@@ -44,6 +44,7 @@ export default function CatalogCategories() {
           key={i.id}
           onClick={() => {
             dispatch(activeCategoryChanged({ name: i.title, id: i.id }));
+            dispatch(shoesCategoryChanged())
           }}
         >
           <a className={itemClass} href="#">
@@ -63,7 +64,10 @@ export default function CatalogCategories() {
     <ul className="catalog-categories nav justify-content-center add-width">
       <li
         className="nav-item"
-        onClick={() => dispatch(activeCategoryChanged({ name: "all", id: '' }))}
+        onClick={() => {
+          dispatch(activeCategoryChanged({ name: "all", id: '' }))
+          dispatch(shoesCategoryChanged())
+        }}
       >
         <a className={itemClassAll} href="#">
           Все
