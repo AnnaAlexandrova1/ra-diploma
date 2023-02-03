@@ -5,17 +5,17 @@ import fetchApi from "../../api/fetchApi";
 import ItemInfo from "./ItemInfo";
 import Preloader from "../Preloader/Preloader";
 import Error from "../Error/Error";
-import { useHttp } from "../../hooks/http.hook";
-import { fetchitemId } from "../../actions";
+// import { useHttp } from "../../hooks/http.hook";
+// import { fetchitemId } from "../../actions";
 
 export default function ItemPage() {
   const { id, itemLoadingStatus, item } = useSelector((state) => state.itemId)
   const dispatch = useDispatch();
-  const { request } = useHttp();
+  // const { request } = useHttp();
 
-  useEffect(() => {
-    dispatch(fetchitemId(request, id))
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchitemId(request, id))
+  // }, []);
 
   // console.log(id)
   // console.log(item)
@@ -24,6 +24,9 @@ export default function ItemPage() {
     return <Preloader />;
   } else if (itemLoadingStatus === "error") {
     return <Error />;
+  }
+  if (!item) {
+    console.log('jib,rf')
   }
 
   return (
