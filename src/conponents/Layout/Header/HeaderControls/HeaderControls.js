@@ -2,28 +2,27 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { searchShoesChanged } from "../../../../actions";
+import { getQty } from "../../../../localStorage/localStorage";
 
 export default function HeaderControls() {
   const [searchFocus, setSearchFocus] = useState(false);
   const [cartQuantaty, setCartQuantaty] = useState(0);
-  const dispatch = useDispatch()
-  const dataRef = useRef()
-  const navigate = useNavigate()
+  const dataRef = useRef();
+  const navigate = useNavigate();
+
+  const qty = getQty();
 
   useEffect(() => {
     setCartQuantaty(qty);
-  });
+  }, [qty]);
 
   const showQuantaty = () => {
-    if (cartQuantaty===0) {
+    if (cartQuantaty < 1) {
       return "header-controls-cart-full invisible";
     }
     return "header-controls-cart-full";
   };
-
-  const qty = useSelector((state) => state.qty);
 
   const onSearchFocus = () => {
     setSearchFocus(!searchFocus);
@@ -52,19 +51,15 @@ export default function HeaderControls() {
           </div>
         </Link>
       </div>
-      <form data-id="search-form"
+      <form
+        data-id="search-form"
         className={drowVisibility}
         onSubmit={(e) => {
-          e.preventDefault()
-          dispatch(searchShoesChanged(dataRef.current.value))
-          navigate("/catalog")
-        }} 
-        
+          e.preventDefault();
+          navigate("/catalog");
+        }}
       >
-        <input className="form-control"
-          placeholder="Поиск"
-          ref={dataRef}
-        />
+        <input className="form-control" placeholder="Поиск" ref={dataRef} />
       </form>
     </>
   );

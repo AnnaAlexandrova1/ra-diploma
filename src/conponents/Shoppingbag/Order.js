@@ -3,8 +3,8 @@ import React from "react";
 import { getShoppingBag } from "../../localStorage/localStorage";
 import fetchApi from "../../api/fetchApi";
 
-export default function Order({ orderPosted}) {
-  const [orderStatus, setOrderStatus] = useState(false);
+export default function Order({ orderPosted, orderStatus, setOrderStatus}) {
+ // const [orderStatus, setOrderStatus] = useState(false);
 
   const changeStatus = (responce) => {
     if (responce) {

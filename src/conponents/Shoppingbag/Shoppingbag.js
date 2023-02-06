@@ -4,7 +4,8 @@ import { getShoppingBag } from "../../localStorage/localStorage";
 import { useState } from "react";
 
 export default function Shoppingbag() {
-    const [list, setList] = useState(getShoppingBag() || [])
+  const [list, setList] = useState(getShoppingBag() || [])
+  const [orderStatus, setOrderStatus] = useState(false);
 
     const updateShoppingBag = () => {
         setList(getShoppingBag() || [])
@@ -36,10 +37,10 @@ export default function Shoppingbag() {
               <th scope="col">Действия</th>
             </tr>
           </thead>
-          <tbody>{drowtList(list)}</tbody>
+          <tbody>{orderStatus ? null : drowtList(list)}</tbody>
         </table>
       </section>
-      <Order updateShoppingBag={updateShoppingBag} />
+      <Order updateShoppingBag={updateShoppingBag} orderStatus={orderStatus} setOrderStatus={ setOrderStatus} />
     </>
   );
 }

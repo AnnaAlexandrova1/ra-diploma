@@ -61,3 +61,13 @@ export function deleteFromShoppinBag(sku, size) {
     );
   }
 }
+
+// количество товаров  в корзине штучно
+
+export const getQty = () => {
+  const array = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    array.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+  }
+  return array.reduce((sum, current) => sum + current.qty, 0)
+}
