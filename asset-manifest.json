@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ra-diploma/static/css/main.b0dfdcae.css",
-    "main.js": "/ra-diploma/static/js/main.bfe21769.js",
+    "main.css": "/ra-diploma/static/css/main.1c64ca8c.css",
+    "main.js": "/ra-diploma/static/js/main.437b5a0b.js",
     "static/media/banner.jpg": "/ra-diploma/static/media/banner.5fd2c60d58a8686daee0.jpg",
     "static/media/footer-sprite.png": "/ra-diploma/static/media/footer-sprite.b3d5697aeb76ce9f8002.png",
     "index.html": "/ra-diploma/index.html",
-    "main.b0dfdcae.css.map": "/ra-diploma/static/css/main.b0dfdcae.css.map",
-    "main.bfe21769.js.map": "/ra-diploma/static/js/main.bfe21769.js.map"
+    "main.1c64ca8c.css.map": "/ra-diploma/static/css/main.1c64ca8c.css.map",
+    "main.437b5a0b.js.map": "/ra-diploma/static/js/main.437b5a0b.js.map"
   },
   "entrypoints": [
-    "static/css/main.b0dfdcae.css",
-    "static/js/main.bfe21769.js"
+    "static/css/main.1c64ca8c.css",
+    "static/js/main.437b5a0b.js"
   ]
 }
