@@ -2,6 +2,7 @@ import PropTypes, { func } from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { addToStorage } from "../../localStorage/localStorage";
+import Sizes from "./Sizes";
 
 export default function ItemInfo(props) {
   const {
@@ -23,6 +24,7 @@ export default function ItemInfo(props) {
 
   const [selectSize, setSelectSize] = useState(null);
   const [qty, setQty] = useState(1);
+  console.log(selectSize)
 
   const updateSize = (char) => {
     setSelectSize(char);
@@ -119,37 +121,7 @@ export default function ItemInfo(props) {
 }
 
 
-const Sizes = (props) => {
-  const list = Array.from(document.querySelectorAll("#sizes"));
 
-  if (list.length > 0) {
-    list.forEach((item) => {
-      item.onclick = () => {
-        list.forEach((elem) => {
-          elem.classList.remove("selected");
-        });
-        item.classList.add("selected");
-        props.updateSize(item.textContent);
-      };
-    });
-  }
-
-  return props.list.map((item, i) => {
-    if (item.size) {
-      return (
-        <span
-          className="catalog-item-size"
-          id="sizes"
-          //onClick={() => {}}
-          //onClick={() => {}  }
-          key={i}
-        >
-          {item.size}
-        </span>
-      );
-    }
-  });
-};
 
 ItemInfo.propTypes = {
   category: PropTypes.number,

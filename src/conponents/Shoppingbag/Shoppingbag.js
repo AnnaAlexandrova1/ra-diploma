@@ -1,27 +1,45 @@
 import Order from "./Order";
 import Item from "./Item";
 import { getShoppingBag } from "../../localStorage/localStorage";
+import { useState } from "react";
 
 export default function Shoppingbag() {
-    const list = getShoppingBag()
-    // localStorage.clear()
-    //console.log(list)
+    const [list, setList] = useState(getShoppingBag() || [])
 
-    const drowtList = (list) => {
-        if (list.length > 0) {
-            return list.map((item, i) => {
-                return <Item item={item} i={i} />
-              })  
-        } else {
-            return null
-        }
+    const updateShoppingBag = () => {
+        setList(getShoppingBag() || [])
     }
-    const productList = drowtList(list)
-    
-    return (
-        <>
-        {productList}
-        <Order />
-        </>
-    )
+
+  const drowtList = (list) => {
+    if (list.length > 0) {
+      return list.map((item, i) => {
+          return <Item item={item} i={i} updateShoppingBag={updateShoppingBag} />;
+      });
+    } else {
+      return null;
+    }
+  };
+
+  return (
+    <>
+      <section className="cart">
+        <h2 className="text-center">Корзина</h2>
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Название</th>
+              <th scope="col">Размер</th>
+              <th scope="col">Кол-во</th>
+              <th scope="col">Стоимость</th>
+              <th scope="col">Итого</th>
+              <th scope="col">Действия</th>
+            </tr>
+          </thead>
+          <tbody>{drowtList(list)}</tbody>
+        </table>
+      </section>
+      <Order updateShoppingBag={updateShoppingBag} />
+    </>
+  );
 }

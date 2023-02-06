@@ -3,7 +3,7 @@ import React from "react";
 import { getShoppingBag } from "../../localStorage/localStorage";
 import fetchApi from "../../api/fetchApi";
 
-export default function Order({ orderPosted }) {
+export default function Order({ orderPosted}) {
   const [orderStatus, setOrderStatus] = useState(false);
 
   const changeStatus = (responce) => {
@@ -14,6 +14,8 @@ export default function Order({ orderPosted }) {
       return;
     }
   };
+
+ 
 
   return (
     <section className="order">
@@ -75,6 +77,7 @@ const Form = ({ orderStatus, changeStatus }) => {
         if (responce) {
           localStorage.clear();
           changeStatus(responce);
+    
         }
       });
     } else {
@@ -128,6 +131,6 @@ const Form = ({ orderStatus, changeStatus }) => {
 
 const Succes = ({ orderStatus }) => {
   if (orderStatus) {
-    return <div> Ваш заказ успешно отправлен</div>;
+    return <h2 className="text-center"> Ваш заказ успешно отправлен</h2>;
   } else return;
 };
