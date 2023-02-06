@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { getTopSales } from "../../../api/fetchApi";
 import Card from "../../Catalog/Card/Card"
 import Error from "../../Error/Error";
@@ -49,10 +48,9 @@ export default function TopSales() {
      <section className="top-sales">
       <h2 className="text-center">Хиты продаж!</h2>
       {loading === 'pending' ? <Preloader /> : (
-        <div className="row">
+        <div className="row align-space-between">
           {topList.map((product) => {
             return (
-              <div className="col-4" key={product.id}>
                 <Card 
         key={product.id}
         id={product.id}
@@ -60,7 +58,6 @@ export default function TopSales() {
         title={product.title}
         images={product.images}
         price={product.price} />
-              </div>
             );
           })}
         </div>
